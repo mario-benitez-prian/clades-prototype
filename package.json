@@ -2,7 +2,7 @@
   "name": "clades-prototype",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/mario-benitez-prian/clades-prototype",
+  "homepage": "https://mario-benitez-prian.github.io/clades-prototype",
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
