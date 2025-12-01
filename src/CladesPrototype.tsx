@@ -1,5 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
+
+
+//
+// Variables declaration and typescritps
+//
+
 type Taxonomy = {
   phylum: string;
   class: string;
@@ -36,6 +42,14 @@ const SPECIES: Species[] = [
 ];
 
 const RANKS: (keyof Taxonomy)[] = ['phylum','class','order','family','genus','species'];
+
+
+
+
+//
+// App logic
+//
+
 
 function shuffle<T>(arr: T[]): T[] {
   const a = arr.slice();
@@ -127,32 +141,48 @@ export default function CladesPrototype(){
     setLastResult(null);
   }
 
-  // Styles (same que antes)
- // Simple style block (original)
-const style = `:root{--bg:#f7fbff;--card:#ffffff;--accent:#3b82f6;--muted:#6b7280}
-.wrap{max-width:640px;margin:18px auto;padding:12px;font-family:Inter,system-ui,Segoe UI,Helvetica,Arial,sans-serif}
-.card{background:var(--card);border-radius:12px;box-shadow:0 6px 18px rgba(20,30,60,0.06);padding:14px}
-header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-h1{font-size:18px;margin:0}
-.meta{color:var(--muted);font-size:13px}
-.image{width:100%;height:220px;border-radius:10px;overflow:hidden;background:linear-gradient(180deg,#e6f0ff,#fff);display:flex;align-items:center;justify-content:center}
-img{width:100%;height:100%;object-fit:cover}
-label{font-size:12px;color:var(--muted);display:block;margin-bottom:6px}
-input{width:100%;padding:10px;border-radius:8px;border:1px solid #e6e9ef;font-size:14px}
-.row{display:flex;gap:8px;margin-top:8px}
-.col{flex:1}
-.controls{display:flex;gap:8px;margin-top:6px}
-button{background:var(--accent);color:white;border:0;padding:10px 14px;border-radius:10px;font-weight:600}
-.ghost{background:transparent;color:var(--accent);border:1px solid rgba(59,130,246,0.12)}
-.small{font-size:13px;color:var(--muted)}
-`;
+
+
+
+
+  //
+  // App style
+  //
+
+
+  const style = `:root{--bg:#f7fbff;--card:#ffffff;--accent:#3b82f6;--muted:#6b7280}
+  .wrap{max-width:640px;margin:18px auto;padding:12px;font-family:Inter,system-ui,Segoe UI,Helvetica,Arial,sans-serif}
+  .card{background:var(--card);border-radius:12px;box-shadow:0 6px 18px rgba(20,30,60,0.06);padding:14px}
+  header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+  h1{font-size:18px;margin:0}
+  .meta{color:var(--muted);font-size:13px}
+  .image{width:100%;height:220px;border-radius:10px;overflow:hidden;background:linear-gradient(180deg,#e6f0ff,#fff);display:flex;align-items:center;justify-content:center}
+  img{width:100%;height:100%;object-fit:cover}
+  label{font-size:12px;color:var(--muted);display:block;margin-bottom:6px}
+  input{width:100%;padding:10px;border-radius:8px;border:1px solid #e6e9ef;font-size:14px}
+  .row{display:flex;gap:8px;margin-top:8px}
+  .col{flex:1}
+  .controls{display:flex;gap:8px;margin-top:6px}
+  button{background:var(--accent);color:white;border:0;padding:10px 14px;border-radius:10px;font-weight:600}
+  .ghost{background:transparent;color:var(--accent);border:1px solid rgba(59,130,246,0.12)}
+  .small{font-size:13px;color:var(--muted)}
+  `;
+
+
+
+  //
+  // App interface
+  //
+
+
+
 
   if(!current){
     return (
       <div className="wrap">
         <style>{style}</style>
         <div className="card">
-          <h1>CLADES — Prototipo</h1>
+          <h1>CladeQuest</h1>
           <p className="small">Se han completado las especies. Puntuación final: <strong>{score}</strong></p>
           <div style={{marginTop:12}}>
             <button onClick={reset}>Reiniciar</button>
@@ -168,12 +198,12 @@ button{background:var(--accent);color:white;border:0;padding:10px 14px;border-ra
       <div className="card">
         <header>
           <div style={{flex:1}}>
-            <h1>CLADES — Prototipo</h1>
-            <div className="meta">Especie: <strong>{current.display}</strong> — {current.sci}</div>
+            <h1>CladeQuest</h1>
+            <div className="meta">Nombre común especie: <strong>{current.display}</strong></div>
           </div>
           <div style={{textAlign:'right'}}>
             <div className="small">Score: <strong>{score}</strong></div>
-            <div className="small">Restantes: {remaining.length}</div>
+            <div className="small">Especies restantes: {remaining.length}</div>
           </div>
         </header>
 
@@ -188,14 +218,39 @@ button{background:var(--accent);color:white;border:0;padding:10px 14px;border-ra
             <div className="row" key={rank}>
               <div className="col">
                 <label>{rank.charAt(0).toUpperCase()+rank.slice(1)}</label>
-                <input value={answers[rank] || ''} onChange={(e)=>handleInput(rank, e.target.value)} placeholder={rank} />
-                <div className="controls">
-                  <button className="ghost" onClick={(e)=>{
-                    e.preventDefault();
-                    const q = prompt('Sugerencias para '+rank+' (escribe para filtrar)\n\nOpciones: '+(optionsByRank[rank]||[]).slice(0,10).join(', '));
-                    if(q) handleInput(rank,q);
-                  }}>Sugerencias</button>
+                
+                {/* INICIO DE LOS CAMBIOS: Contenedor Flex */}
+                <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                  
+                  <input 
+                    style={{ flex: 1 }} /* Hace que el input ocupe el espacio sobrante */
+                    value={answers[rank] || ''} 
+                    onChange={(e)=>handleInput(rank, e.target.value)} 
+                    placeholder={rank} 
+                  />
+                  
+                  <button 
+                    className="ghost" 
+                    style={{ 
+                      padding: '0 12px', 
+                      fontWeight: 'bold',
+                      height: '40px',          // ← igual que el input
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}
+                    onClick={(e)=>{
+                      e.preventDefault();
+                      const q = prompt('Sugerencias para '+rank+' (escribe para filtrar)\n\nOpciones: '+(optionsByRank[rank]||[]).slice(0,10).join(', '));
+                      if(q) handleInput(rank,q);
+                    }}
+                  >
+                    ?
+                  </button>
+
                 </div>
+                {/* FIN DE LOS CAMBIOS */}
+
               </div>
             </div>
           ))}
