@@ -87,6 +87,25 @@ export default function CladesPrototype(){
   const [lastResult, setLastResult] = useState<LastResult | null>(null);
   const [imageUrl, setImageUrl] = useState<string|null>(null);
   const [loadingImage, setLoadingImage] = useState(false);
+  const [wikiInfo, setWikiInfo] = useState<Record<string,string>>({});
+  const [popupVisible, setPopupVisible] = useState<Record<string,boolean>>({});
+
+  function togglePopup(rank: keyof Taxonomy) {
+    const visible = popupVisible[rank];
+    setPopupVisible(prev => ({ ...prev, [rank]: !visible }));
+
+    // fetch info si no lo hemos hecho antes
+    if(!wikiInfo[rank] && !visible) {
+      fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${answers[rank]}`)
+        .then(res => res.json())
+        .then(data => {
+          if(data.extract) {
+            setWikiInfo(prev => ({ ...prev, [rank]: data.extract }));
+          }
+        });
+    }
+  }
+
 
   // statistics stored in localStorage
   const [stats, setStats] = useState<AllStats>(() => {
@@ -135,9 +154,33 @@ export default function CladesPrototype(){
       .finally(()=>setLoadingImage(false));
   }
 
-  function handleInput(rank: keyof Taxonomy, value: string){
-    setAnswers(prev => ({...prev, [rank]: value}));
+  function handleInput(rank: keyof Taxonomy, value: string) {
+    setAnswers(prev => {
+      if (rank === 'genus') {
+        // Si species todavía contiene solo lo que se copió del género, autocompletamos species
+        return {
+          ...prev,
+          genus: value,
+          species: prev.species === prev.genus ? value : prev.species
+        };
+      } else if (rank === 'species') {
+        // Tomamos la primera palabra de species
+        const firstWord = value.split(' ')[0];
+        // Si genus todavía contiene solo lo que se copió de species, autocompletamos genus
+        return {
+          ...prev,
+          species: value,
+          genus: prev.genus === prev.species ? firstWord : prev.genus
+        };
+      } else {
+        // Para otros campos, solo actualizamos el campo correspondiente
+        return { ...prev, [rank]: value };
+      }
+    });
   }
+
+    
+  
 
   // update stats helper after an attempt
   function recordAttemptInStats(speciesId: string, corrects: Record<keyof Taxonomy, boolean>){
@@ -259,8 +302,34 @@ export default function CladesPrototype(){
       return aa - bb;
     });
 
-    return { playedSpecies, totalSpecies: SPECIES.length, speciesCorrectAll, rankPct, speciesList };
+    // --- NUEVO: construir la lista de especies jugadas con fallos ---
+    // Para cada especie tomamos su entry en stats y contamos cuántas categorías
+    // han sido acertadas al menos una vez (correctByRank[r] > 0).
+    // Solo incluimos especies con attempts > 0 y correctCount < 6 (es decir, falló al menos alguna categoría).
+    const failedSpeciesList = SPECIES.map(sp => {
+      const s = stats[sp.id] || makeEmptyPerSpeciesStats();
+      const attempts = s.attempts || 0;
+
+      // correctCount: número de rangos (de 6) que se han acertado al menos una vez históricamente
+      const correctCount = RANKS.reduce((acc, r) => acc + ((s.correctByRank[r] || 0) > 0 ? 1 : 0), 0);
+
+      const hasAnyMistake = attempts > 0 && correctCount < RANKS.length;
+
+      return {
+        species: sp,
+        attempts,
+        correctCount,
+        hasAnyMistake
+      };
+    })
+    // solo las que tengan al menos un intento y algún fallo
+    .filter(item => item.hasAnyMistake)
+    // ordenar peor → mejor (menos aciertos primero)
+    .sort((a, b) => a.correctCount - b.correctCount);
+
+    return { playedSpecies, totalSpecies: SPECIES.length, speciesCorrectAll, rankPct, speciesList, failedSpeciesList };
   },[stats]);
+
 
 
 
@@ -270,7 +339,7 @@ export default function CladesPrototype(){
 
 
   // --- styles (added progress bar) ---
-  const style = `:root{--bg:#f7fbff;--card:#ffffff;--accent:#3b82f6;--muted:#6b7280}
+  const style = `:root{--bg:#f7fbff;--card:#ffffff;--accent:rgba(58, 105, 99, 0.9);--muted:#6b7280}
   .wrap{max-width:720px;margin:18px auto;padding:12px;font-family:Inter,system-ui,Segoe UI,Helvetica,Arial,sans-serif}
   .card{background:var(--card);border-radius:12px;box-shadow:0 6px 18px rgba(20,30,60,0.06);padding:14px}
   header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
@@ -304,29 +373,144 @@ export default function CladesPrototype(){
   .species-left{display:flex;gap:12px;align-items:center}
   .small-muted{font-size:12px;color:#94a3b8}
    /* resaltado suave para inputs tras enviar respuesta */
+  /* pequeño progreso para cada especie */
+  .progress-mini {
+    width: 80px;
+    height: 6px;
+    border-radius: 4px;
+    background: #e2e8f0;
+    overflow: hidden;
+  }
+  .progress-mini-fill {
+    height: 100%;
+    background: rgba(58, 105, 99, 0.9);
+    transition: width 0.25s;
+  }
+
+  .card-mini {
+  margin-bottom: 12px;
+  padding: 12px 14px;
+  background: rgb(251, 253, 255);
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cgi-title {
+  font-size: 14px;
+  color: #334155;
+  margin-bottom: 6px;
+}
+
+.cgi-progress-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cgi-progress-bar {
+  flex: 1;
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.cgi-progress-bar-fill {
+  height: 100%;
+  background: rgba(58, 105, 99, 0.9);
+  transition: width 0.25s;
+}
+
+.cgi-progress-text {
+  font-size: 13px;
+  color: #334155;
+  font-weight: 600;
+}
+
+
   `;
 
 
   //
   // App interface
   //
-
   if (screen === 'home') {
     return (
       <div className="wrap">
         <style>{style}</style>
+
         <div className="card" style={{ textAlign: 'center', padding: '30px' }}>
           
+          {/* Logo */}
           <img
             src={`${process.env.PUBLIC_URL}/Logo_TaxoGuessr.png`}
             alt="CladeQuest logo"
-            style={{ width: 300, height: 'auto'}}
+            style={{ width: 260, height: 'auto', marginBottom: 10 }}
           />
 
-          <p className="small" style={{ marginBottom: '20px' }}>
-            Aprende taxonomía jugando: identifica el filo, clase, orden y más.
+          {/* Imagen representativa */}
+          <div 
+            style={{
+              width: '100%',
+              height: 160,
+              borderRadius: 12,
+              overflow: 'hidden',
+              background: '#eef2f8',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: 20
+            }}
+          >
+            <img 
+              src={`${process.env.PUBLIC_URL}/Home_picture.jpg`} 
+              alt="Vista previa del juego" 
+              style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.85 }} 
+            />
+          </div>
+
+          {/* Descripción */}
+          <p className="small" style={{ marginBottom: '20px', lineHeight: '1.6', color:'#475569' }}>
+            Descubre la <strong>diversidad de la vida</strong> mientras juegas: aprende a <strong>clasificar especies</strong>, 
+            desde su <strong>filo</strong> hasta su <strong>especie</strong>
+            , apreciando la <strong>riqueza de la naturaleza</strong>. Cada acierto te acerca a <strong>dominar la taxonomía </strong> 
+            y reconocer las <strong>conexiones ocultas</strong> entre los seres vivos.
           </p>
 
+          {/* Reglas rápidas */}
+          <div 
+            style={{
+              textAlign: 'left',
+              background: '#f8fafc',
+              padding: '15px',
+              borderRadius: 12,
+              marginBottom: 20
+            }}
+          >
+            <h3 style={{ margin: '0 0 10px 0', fontSize: 16 }}>Cómo se juega</h3>
+
+            <div style={{ fontSize: 14, color: '#475569', lineHeight: '1.5' }}>
+              <div style={{ display: 'flex', gap: 8, marginBottom: 6 }}>
+                <span>🖼️</span>
+                <span>1. Mira la imagen de la especie.</span>
+              </div>
+
+              <div style={{ display: 'flex', gap: 8, marginBottom: 6 }}>
+                <span>✏️</span>
+                <span>2. Adivina su clasificación taxonómica.</span>
+              </div>
+
+              <div style={{ display: 'flex', gap: 8 }}>
+                <span>✔️</span>
+                <span>3. Recibe feedback inmediato y mejora paso a paso.</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Botones */}
           <button 
             style={{ width: '100%', marginBottom: '10px' }}
             onClick={() => setScreen('game')}
@@ -334,17 +518,11 @@ export default function CladesPrototype(){
             Comenzar partida
           </button>
 
-          <button 
-            className="ghost"
-            style={{ width: '100%' }}
-            onClick={() => setScreen('profile')}
-          >
-            Ver perfil
-          </button>
         </div>
       </div>
     );
   }
+
 
   
   // --- profile view ---
@@ -368,7 +546,7 @@ export default function CladesPrototype(){
               </div>
               <div style={{background:'#fbfdff',padding:12,borderRadius:10}}>
                 <div className="small">Especies acertadas al 100%</div>
-                <div style={{fontWeight:700,fontSize:18}}>{profileData.speciesCorrectAll}/{profileData.playedSpecies || profileData.totalSpecies}</div>
+                <div style={{fontWeight:700,fontSize:18}}>{profileData.speciesCorrectAll}/{profileData.totalSpecies}</div>
               </div>
             </div>
 
@@ -386,29 +564,48 @@ export default function CladesPrototype(){
             </div>
 
             <div style={{marginTop:18}}>
-              <div className="small">Especies (peor → mejor)</div>
+              <div className="small">Juega a las especies que aún no dominas</div>
               <div style={{marginTop:8}}>
-                {profileData.speciesList.map(item => (
-                  <div className="species-row" key={item.species.id}>
-                    <div className="species-left">
-                      <div style={{width:10,height:10,borderRadius:3,background:'#e6eefc'}} />
-                      <div>
-                        <div style={{fontWeight:700}}>{item.species.display}</div>
-                        <div className="small-muted">{item.attempts>0 ? `${item.perfect}/${item.attempts} perfect` : 'Sin jugar'}</div>
+                {(!profileData || !profileData.failedSpeciesList || profileData.failedSpeciesList.length === 0) ? (
+                  <div className="small" style={{marginTop:6}}>¡Perfecto! No hay especies con errores aún.</div>
+                ) : (
+                  profileData.failedSpeciesList.map(item => (
+                    <div className="species-row" key={item.species.id}>
+                      <div className="species-left" style={{display:'flex',gap:12,alignItems:'center'}}>
+                        <div style={{width:10,height:10,borderRadius:3,background:'#e6eefc'}} />
+                        <div style={{flex:1}}>
+                          <div style={{fontWeight:700}}>{item.species.display}</div>
+
+                          {/* Barra de progreso + texto debajo */}
+                          <div style={{display:'flex', alignItems:'center', gap:10, marginTop:6}}>
+                            <div className="progress-mini">
+                              <div
+                                className="progress-mini-fill"
+                                style={{ width: `${(item.correctCount / RANKS.length) * 100}%` }}
+                              />
+                            </div>
+                            <div className="small-muted" style={{minWidth:48}}>
+                              {item.correctCount}/{RANKS.length}
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+
+                      <div style={{display:'flex',gap:8,alignItems:'center'}}>
+                        <button className="ghost" onClick={()=>{
+                          // practice this species: set as current and remove from remaining
+                          setCurrent(item.species);
+                          setRemaining(prev => prev.filter(p=>p.id !== item.species.id));
+                          setScreen('game');
+                        }}> Practicar </button>
                       </div>
                     </div>
-                    <div style={{display:'flex',gap:8,alignItems:'center'}}>
-                      <button className="ghost" onClick={()=>{
-                        // practice this species: set as current and remove from remaining
-                        setCurrent(item.species);
-                        setRemaining(prev => prev.filter(p=>p.id !== item.species.id));
-                        setScreen('game');
-                      }}> Practicar </button>
-                    </div>
-                  </div>
-                ))}
+                  ))
+                )}
               </div>
             </div>
+
 
           </div>
         </div>
@@ -428,7 +625,7 @@ export default function CladesPrototype(){
             alt="CladeQuest logo"
             style={{ width: 300, height: 'auto', marginBottom: 12 }}
           />
-          <p className="small">Se han completado las especies. Puntuación final: <strong>{score}</strong></p>
+          <p className="small">Enhorabuena! Se han completado las especies. Puntuación final: <strong>{score}</strong></p>
           <div style={{marginTop:12}}>
             <button onClick={reset}>Reiniciar</button>
           </div>
@@ -479,11 +676,24 @@ export default function CladesPrototype(){
           </div>
         </header>
 
-        <div className="current_game_info"  style={{marginBottom: 12}} >
-          <div className="meta">Nombre común especie: <strong>{current.display}</strong></div>
-          <div className="small">Score: <strong>{score}</strong></div>
-          <div className="small">Especies restantes: {remaining.length}</div>
+        <div className="current_game_info card-mini">
+
+          <div className="cgi-progress-row">
+            <div className="cgi-title">Especies jugadas: </div>
+            <div className="cgi-progress-bar">
+              <div className="cgi-progress-bar-fill" style={{ width: `${(profileData.playedSpecies / profileData.totalSpecies) * 100}%` }}>
+                 
+              </div>
+            </div>
+            <span className="cgi-progress-text">
+              {profileData.speciesList.filter(s => s.attempts > 0).length}/{SPECIES.length}
+            </span>
+          </div>
+
+          <div className="cgi-title">Nombre común: <strong>{current.display}</strong></div>
+
         </div>
+
 
         <div className="image">
           {loadingImage ? <div className="small">Cargando imagen…</div> : (
@@ -497,38 +707,107 @@ export default function CladesPrototype(){
               <div className="col">
                 <label>{rank.charAt(0).toUpperCase()+rank.slice(1)}</label>
                 
-                {/* INICIO DE LOS CAMBIOS: Contenedor Flex */}
+                {/* INICIO DE LOS CAMBIOS: Input con botón de sugerencia + info */}
                 <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                  
+
+                  {/* Input */}
                   <input
                     style={{ flex: 1 }}
-                    // preservamos otras clases si las tuvieras (por ejemplo '' o 'mi-clase')
-                    className={ lastResult && lastResult.corrects[rank] ? "input-correct" : lastResult ? "input-wrong" : "" }                    value={answers[rank] || ''}
+                    className={ lastResult && lastResult.corrects[rank] ? "input-correct" : lastResult ? "input-wrong" : "" }
+                    value={answers[rank] || ''}
                     onChange={(e) => handleInput(rank, e.target.value)}
                     placeholder={rank}
                   />
-                  
-                  <button 
-                    className="ghost" 
-                    style={{ 
-                      padding: '0 12px', 
-                      fontWeight: 'bold',
-                      height: '40px',          // ← igual que el input
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}
-                    onClick={(e)=>{
-                      e.preventDefault();
-                      const q = prompt('Sugerencias para '+rank+' (escribe para filtrar)\n\nOpciones: '+(optionsByRank[rank]||[]).slice(0,10).join(', '));
-                      if(q) handleInput(rank,q);
-                    }}
-                  >
-                    ?
-                  </button>
+
+                  {/* Botón de sugerencia (prompt) */}
+                  {!lastResult &&(
+
+                    <button 
+                      className="ghost" 
+                      style={{ padding: '0 12px', fontWeight: 'bold', height: '40px', display:'flex', alignItems:'center', justifyContent:'center' }}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const q = prompt(
+                          'Sugerencias para ' + rank + '\n\nOpciones: ' + (optionsByRank[rank]||[]).slice(0,10).join(', ')
+                        );
+                        if(q) handleInput(rank, q);
+                      }}
+                    >💡</button>
+
+                  )}
+
+                  {/* Botón de información */}
+                  {lastResult &&(
+
+                    <button
+                      className="ghost"
+                      style={{ padding: '0 12px', fontWeight: 'bold', height: '40px', display:'flex', alignItems:'center', justifyContent:'center' }}
+                      onClick={() => {
+                        const correctCategory = current?.taxonomy[rank];
+                        if(!correctCategory) return;
+
+                        // Abrir popup
+                        setPopupVisible(prev => ({ ...prev, [correctCategory]: true }));
+
+                        // Fetch info si no está cargada
+                        if(!wikiInfo[correctCategory]) {
+                          const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(correctCategory)}`;
+                          fetch(url)
+                            .then(res => res.json())
+                            .then(data => setWikiInfo(prev => ({ ...prev, [correctCategory]: data.extract || 'No hay información disponible' })))
+                            .catch(() => setWikiInfo(prev => ({ ...prev, [correctCategory]: 'No se pudo cargar la información' })));
+                        }
+                      }}
+                    >?</button>
+
+                  )}
 
                 </div>
-                {/* FIN DE LOS CAMBIOS */}
+
+                {lastResult && !lastResult.corrects[rank] && (
+                    <div
+                      style={{
+                        display: 'inline-block',       // Hace que el ancho se ajuste al contenido
+                        padding: '4px 8px',            // Espacio interno
+                        borderRadius: 6,               // Bordes redondeados
+                        background: '#d1fae5',         // Verde suave
+                        fontSize: '13px',
+                        color: '#065f46',
+                        marginTop: 4
+                      }}
+                    >
+                      {lastResult.expected[rank]}
+                    </div>
+                )}
+
+                {/* Popup */}
+                {current && popupVisible[current.taxonomy[rank]] && (
+                  <div style={{
+                    position:'fixed', top:0, left:0, width:'100vw', height:'100vh',
+                    display:'flex', justifyContent:'center', alignItems:'center',
+                    backgroundColor:'rgba(0,0,0,0.4)', zIndex:9999
+                  }}>
+                    <div style={{
+                      background:'#fff', borderRadius:12, padding:24, maxWidth:400, width:'90%', position:'relative', boxShadow:'0 8px 24px rgba(0,0,0,0.2)'
+                    }}>
+                      {/* Botón cerrar */}
+                      <button 
+                        onClick={() => setPopupVisible(prev => ({ ...prev, [current.taxonomy[rank]]: false }))}
+                        style={{
+                          position:'absolute', top:12, right:12, border:'none', background:'transparent',
+                          fontSize:20, cursor:'pointer', color:'#333'
+                        }}
+                      >×</button>
+
+                      <h3 style={{ marginTop:0 }}>{current.taxonomy[rank]}</h3>
+                      <p>{wikiInfo[current.taxonomy[rank]] || 'Cargando información...'}</p>
+                    </div>
+                  </div>
+                )}
+
+{/* FIN DE LOS CAMBIOS */}
+
+
 
               </div>
             </div>
@@ -536,9 +815,9 @@ export default function CladesPrototype(){
         </div>
 
         <div style={{display:'flex',gap:8,marginTop:12}}>
-          <button onClick={submit} disabled={!!lastResult}>Enviar respuesta</button>
-
-          <button className="ghost" onClick={showSolution}>Mostrar solución</button>
+          {!lastResult && (
+            <button onClick={submit}>Enviar respuesta</button>
+          )}
 
           {/* Botón para avanzar manualmente; solo activo después de enviar respuesta */}
           <button 
@@ -553,12 +832,6 @@ export default function CladesPrototype(){
         {lastResult && (
           <div style={{marginTop:10,fontWeight:700}}>
             Resultado: {lastResult.points} puntos en esta ronda.
-            <div className="small" style={{marginTop:6}}>
-              Respuestas correctas por rango:
-              <ul>
-                {RANKS.map(r=> <li key={r}>{r}: {lastResult.corrects[r] ? '✓' : '✕'} (esperado: {lastResult.expected[r]})</li>)}
-              </ul>
-            </div>
           </div>
         )}
 
