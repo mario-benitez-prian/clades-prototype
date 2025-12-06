@@ -391,8 +391,6 @@ export default function CladesPrototype(){
   // App style
   //
 
-
-  // --- styles (added progress bar) ---
   const style = `:root{--bg:#f7fbff;--card:#ffffff;--accent:rgba(58, 105, 99, 0.9);--muted:#6b7280}
   .wrap{max-width:720px;margin:18px auto;padding:12px;font-family:Inter,system-ui,Segoe UI,Helvetica,Arial,sans-serif}
   .card{background:var(--card);border-radius:12px;box-shadow:0 6px 18px rgba(20,30,60,0.06);padding:14px}
@@ -530,8 +528,7 @@ export default function CladesPrototype(){
           <p className="small" style={{ marginBottom: '20px', lineHeight: '1.6', color:'#475569' }}>
             Descubre la <strong>diversidad de la vida</strong> mientras juegas: aprende a <strong>clasificar especies</strong>, 
             desde su <strong>filo</strong> hasta su <strong>especie</strong>
-            , apreciando la <strong>riqueza de la naturaleza</strong>. Cada acierto te acerca a <strong>dominar la taxonomía </strong> 
-            y reconocer las <strong>conexiones ocultas</strong> entre los seres vivos.
+            , apreciando la <strong>riqueza de la naturaleza</strong>.
           </p>
 
           {/* Reglas rápidas */}
@@ -584,12 +581,29 @@ export default function CladesPrototype(){
     return (
       <div className="wrap">
         <style>{style}</style>
+
         <div style={{position:'relative'}}>
-          <div className="top-right">
-            <button className="ghost" onClick={()=>setScreen('game')}>Volver</button>
-          </div>
 
           <div className="card">
+
+            <div style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'space-between', 
+              marginBottom: 10 
+            }}>
+              <img
+                src={`${process.env.PUBLIC_URL}/Logo_TaxoGuessr_2.png`}
+                alt="CladeQuest logo"
+                style={{ width: 120, height: 'auto' }}
+              />
+
+              {/* He quitado el div "top-right" intermedio para que el flex funcione directo sobre el botón */}
+              <button className="ghost" onClick={()=>setScreen('game')}>
+                Volver
+              </button>
+            </div>
+
             <h1>Perfil</h1>
             <p className="small">Resumen de progreso</p>
 
