@@ -1,0 +1,688 @@
+[
+  {
+    "id": "homo_sapiens_linnaeus",
+    "display": "human",
+    "sci": "Homo sapiens Linnaeus, 1758",
+    "gbifKey": 2436436,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Primates",
+      "family": "Hominidae",
+      "genus": "Homo",
+      "species": "Homo sapiens"
+    }
+  },
+  {
+    "id": "pan_troglodytes__blumenbach",
+    "display": "chimpanzee",
+    "sci": "Pan troglodytes (Blumenbach, 1775)",
+    "gbifKey": 5219534,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Primates",
+      "family": "Hominidae",
+      "genus": "Pan",
+      "species": "Pan troglodytes"
+    }
+  },
+  {
+    "id": "gorilla_gorilla__savage",
+    "display": "gorilla",
+    "sci": "Gorilla gorilla (Savage, 1847)",
+    "gbifKey": 2436441,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Primates",
+      "family": "Hominidae",
+      "genus": "Gorilla",
+      "species": "Gorilla gorilla"
+    }
+  },
+  {
+    "id": "panthera_leo__linnaeus",
+    "display": "African lion",
+    "sci": "Panthera leo (Linnaeus, 1758)",
+    "gbifKey": 5219404,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Felidae",
+      "genus": "Panthera",
+      "species": "Panthera leo"
+    }
+  },
+  {
+    "id": "panthera_tigris__linnaeus",
+    "display": "tiger",
+    "sci": "Panthera tigris (Linnaeus, 1758)",
+    "gbifKey": 5219416,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Felidae",
+      "genus": "Panthera",
+      "species": "Panthera tigris"
+    }
+  },
+  {
+    "id": "balaenoptera_musculus__linnaeus",
+    "display": "blue whale",
+    "sci": "Balaenoptera musculus (Linnaeus, 1758)",
+    "gbifKey": 2440735,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Cetacea",
+      "family": "Balaenopteridae",
+      "genus": "Balaenoptera",
+      "species": "Balaenoptera musculus"
+    }
+  },
+  {
+    "id": "megaptera_novaeangliae__borowski",
+    "display": "humpback whale",
+    "sci": "Megaptera novaeangliae (Borowski, 1781)",
+    "gbifKey": 5220086,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Cetacea",
+      "family": "Balaenopteridae",
+      "genus": "Megaptera",
+      "species": "Megaptera novaeangliae"
+    }
+  },
+  {
+    "id": "orcinus_orca__linnaeus",
+    "display": "orca",
+    "sci": "Orcinus orca (Linnaeus, 1758)",
+    "gbifKey": 2440483,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Cetacea",
+      "family": "Delphinidae",
+      "genus": "Orcinus",
+      "species": "Orcinus orca"
+    }
+  },
+  {
+    "id": "loxodonta_africana__blumenbach",
+    "display": "African elephant",
+    "sci": "Loxodonta africana (Blumenbach, 1797)",
+    "gbifKey": 2435350,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Proboscidea",
+      "family": "Elephantidae",
+      "genus": "Loxodonta",
+      "species": "Loxodonta africana"
+    }
+  },
+  {
+    "id": "elephas_maximus_linnaeus",
+    "display": "Asian elephant",
+    "sci": "Elephas maximus Linnaeus, 1758",
+    "gbifKey": 5219461,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Proboscidea",
+      "family": "Elephantidae",
+      "genus": "Elephas",
+      "species": "Elephas maximus"
+    }
+  },
+  {
+    "id": "equus_ferus_caballus_linnaeus",
+    "display": "Domestic Horse",
+    "sci": "Equus ferus caballus Linnaeus, 1758",
+    "gbifKey": 9117798,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Perissodactyla",
+      "family": "Equidae",
+      "genus": "Equus",
+      "species": "Equus caballus"
+    }
+  },
+  {
+    "id": "canis_lupus_linnaeus",
+    "display": "gray wolf",
+    "sci": "Canis lupus Linnaeus, 1758",
+    "gbifKey": 5219173,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Canidae",
+      "genus": "Canis",
+      "species": "Canis lupus"
+    }
+  },
+  {
+    "id": "vulpes_vulpes__linnaeus",
+    "display": "red fox",
+    "sci": "Vulpes vulpes (Linnaeus, 1758)",
+    "gbifKey": 5219243,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Canidae",
+      "genus": "Vulpes",
+      "species": "Vulpes vulpes"
+    }
+  },
+  {
+    "id": "ursus_arctos_linnaeus",
+    "display": "brown bear",
+    "sci": "Ursus arctos Linnaeus, 1758",
+    "gbifKey": 2433433,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Ursidae",
+      "genus": "Ursus",
+      "species": "Ursus arctos"
+    }
+  },
+  {
+    "id": "ursus_maritimus_phipps",
+    "display": "polar bear",
+    "sci": "Ursus maritimus Phipps, 1774",
+    "gbifKey": 2433451,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Ursidae",
+      "genus": "Ursus",
+      "species": "Ursus maritimus"
+    }
+  },
+  {
+    "id": "ailuropoda_melanoleuca__david",
+    "display": "giant panda",
+    "sci": "Ailuropoda melanoleuca (David, 1869)",
+    "gbifKey": 2433399,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Ursidae",
+      "genus": "Ailuropoda",
+      "species": "Ailuropoda melanoleuca"
+    }
+  },
+  {
+    "id": "delphinus_delphis_linnaeus",
+    "display": "short-beaked common dolphin",
+    "sci": "Delphinus delphis Linnaeus, 1758",
+    "gbifKey": 8324617,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Cetacea",
+      "family": "Delphinidae",
+      "genus": "Delphinus",
+      "species": "Delphinus delphis"
+    }
+  },
+  {
+    "id": "phoca_vitulina_linnaeus",
+    "display": "harbor seal",
+    "sci": "Phoca vitulina Linnaeus, 1758",
+    "gbifKey": 2434793,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Phocidae",
+      "genus": "Phoca",
+      "species": "Phoca vitulina"
+    }
+  },
+  {
+    "id": "monodon_monoceros_linnaeus",
+    "display": "narhwal",
+    "sci": "Monodon monoceros Linnaeus, 1758",
+    "gbifKey": 5220008,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Cetacea",
+      "family": "Monodontidae",
+      "genus": "Monodon",
+      "species": "Monodon monoceros"
+    }
+  },
+  {
+    "id": "carcharodon_carcharias__linnaeus",
+    "display": "great white shark",
+    "sci": "Carcharodon carcharias (Linnaeus, 1758)",
+    "gbifKey": 2420694,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Elasmobranchii",
+      "order": "Lamniformes",
+      "family": "Lamnidae",
+      "genus": "Carcharodon",
+      "species": "Carcharodon carcharias"
+    }
+  },
+  {
+    "id": "thunnus_thynnus__linnaeus",
+    "display": "Atlantic Bluefin Tuna",
+    "sci": "Thunnus thynnus (Linnaeus, 1758)",
+    "gbifKey": 2373980,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "",
+      "order": "Perciformes",
+      "family": "Scombridae",
+      "genus": "Thunnus",
+      "species": "Thunnus thynnus"
+    }
+  },
+  {
+    "id": "gallus_gallus_f__domesticus",
+    "display": "Domestic Chicken",
+    "sci": "Gallus gallus f. domesticus",
+    "gbifKey": 9457155,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Galliformes",
+      "family": "Phasianidae",
+      "genus": "Gallus",
+      "species": "Gallus gallus"
+    }
+  },
+  {
+    "id": "corvus_corax_linnaeus",
+    "display": "Common Raven / Northern Raven",
+    "sci": "Corvus corax Linnaeus, 1758",
+    "gbifKey": 2482492,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Passeriformes",
+      "family": "Corvidae",
+      "genus": "Corvus",
+      "species": "Corvus corax"
+    }
+  },
+  {
+    "id": "falco_peregrinus_tunstall",
+    "display": "Peregrine Falcon",
+    "sci": "Falco peregrinus Tunstall, 1771",
+    "gbifKey": 2481047,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Falconiformes",
+      "family": "Falconidae",
+      "genus": "Falco",
+      "species": "Falco peregrinus"
+    }
+  },
+  {
+    "id": "haliaeetus_leucocephalus__linnaeus",
+    "display": "Bald Eagle",
+    "sci": "Haliaeetus leucocephalus (Linnaeus, 1766)",
+    "gbifKey": 2480446,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Accipitriformes",
+      "family": "Accipitridae",
+      "genus": "Haliaeetus",
+      "species": "Haliaeetus leucocephalus"
+    }
+  },
+  {
+    "id": "struthio_camelus_linnaeus",
+    "display": "Common Ostrich",
+    "sci": "Struthio camelus Linnaeus, 1758",
+    "gbifKey": 2495150,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Struthioniformes",
+      "family": "Struthionidae",
+      "genus": "Struthio",
+      "species": "Struthio camelus"
+    }
+  },
+  {
+    "id": "crocodylus_niloticus_laurenti",
+    "display": "Nile crocodile",
+    "sci": "Crocodylus niloticus Laurenti, 1768",
+    "gbifKey": 2441341,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Crocodylia",
+      "order": "",
+      "family": "Crocodylidae",
+      "genus": "Crocodylus",
+      "species": "Crocodylus niloticus"
+    }
+  },
+  {
+    "id": "chelonia_mydas__linnaeus",
+    "display": "green turtle",
+    "sci": "Chelonia mydas (Linnaeus, 1758)",
+    "gbifKey": 2442225,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Testudines",
+      "order": "",
+      "family": "Cheloniidae",
+      "genus": "Chelonia",
+      "species": "Chelonia mydas"
+    }
+  },
+  {
+    "id": "anas_platyrhynchos_linnaeus",
+    "display": "Mallard",
+    "sci": "Anas platyrhynchos Linnaeus, 1758",
+    "gbifKey": 9761484,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Anseriformes",
+      "family": "Anatidae",
+      "genus": "Anas",
+      "species": "Anas platyrhynchos"
+    }
+  },
+  {
+    "id": "lithobates_catesbeianus__shaw",
+    "display": "American Bullfrog",
+    "sci": "Lithobates catesbeianus (Shaw, 1802)",
+    "gbifKey": 2427091,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Amphibia",
+      "order": "Anura",
+      "family": "Ranidae",
+      "genus": "Lithobates",
+      "species": "Lithobates catesbeianus"
+    }
+  },
+  {
+    "id": "salamandra_salamandra__linnaeus",
+    "display": "Fire salamander",
+    "sci": "Salamandra salamandra (Linnaeus, 1758)",
+    "gbifKey": 2431776,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Amphibia",
+      "order": "Caudata",
+      "family": "Salamandridae",
+      "genus": "Salamandra",
+      "species": "Salamandra salamandra"
+    }
+  },
+  {
+    "id": "apteryx_australis_shaw",
+    "display": "Southern Brown Kiwi",
+    "sci": "Apteryx australis Shaw, 1813",
+    "gbifKey": 2495145,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Apterygiformes",
+      "family": "Apterygidae",
+      "genus": "Apteryx",
+      "species": "Apteryx australis"
+    }
+  },
+  {
+    "id": "spheniscus_demersus__linnaeus",
+    "display": "African Penguin / Jackass Penguin",
+    "sci": "Spheniscus demersus (Linnaeus, 1758)",
+    "gbifKey": 5229384,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Sphenisciformes",
+      "family": "Spheniscidae",
+      "genus": "Spheniscus",
+      "species": "Spheniscus demersus"
+    }
+  },
+  {
+    "id": "pavo_cristatus_linnaeus",
+    "display": "Indian Peafowl",
+    "sci": "Pavo cristatus Linnaeus, 1758",
+    "gbifKey": 9451184,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Galliformes",
+      "family": "Phasianidae",
+      "genus": "Pavo",
+      "species": "Pavo cristatus"
+    }
+  },
+  {
+    "id": "macropus_rufus__desmarest",
+    "display": "red kangaroo",
+    "sci": "Macropus rufus (Desmarest, 1822)",
+    "gbifKey": 5219963,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Diprotodontia",
+      "family": "Macropodidae",
+      "genus": "Macropus",
+      "species": "Macropus rufus"
+    }
+  },
+  {
+    "id": "ornithorhynchus_anatinus__shaw",
+    "display": "Platypus",
+    "sci": "Ornithorhynchus anatinus (Shaw, 1799)",
+    "gbifKey": 2433376,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Monotremata",
+      "family": "Ornithorhynchidae",
+      "genus": "Ornithorhynchus",
+      "species": "Ornithorhynchus anatinus"
+    }
+  },
+  {
+    "id": "tachyglossus_aculeatus__shaw",
+    "display": "short-beaked echidna",
+    "sci": "Tachyglossus aculeatus (Shaw, 1792)",
+    "gbifKey": 2433378,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Monotremata",
+      "family": "Tachyglossidae",
+      "genus": "Tachyglossus",
+      "species": "Tachyglossus aculeatus"
+    }
+  },
+  {
+    "id": "pelecanus_onocrotalus_linnaeus",
+    "display": "Great White Pelican",
+    "sci": "Pelecanus onocrotalus Linnaeus, 1758",
+    "gbifKey": 2480350,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Pelecaniformes",
+      "family": "Pelecanidae",
+      "genus": "Pelecanus",
+      "species": "Pelecanus onocrotalus"
+    }
+  },
+  {
+    "id": "strix_aluco_linnaeus",
+    "display": "Tawny Owl",
+    "sci": "Strix aluco Linnaeus, 1758",
+    "gbifKey": 9282206,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Strigiformes",
+      "family": "Strigidae",
+      "genus": "Strix",
+      "species": "Strix aluco"
+    }
+  },
+  {
+    "id": "alces_alces__linnaeus",
+    "display": "moose",
+    "sci": "Alces alces (Linnaeus, 1758)",
+    "gbifKey": 2440940,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Artiodactyla",
+      "family": "Cervidae",
+      "genus": "Alces",
+      "species": "Alces alces"
+    }
+  },
+  {
+    "id": "bos_taurus_linnaeus",
+    "display": "cow",
+    "sci": "Bos taurus Linnaeus, 1758",
+    "gbifKey": 2441022,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Artiodactyla",
+      "family": "Bovidae",
+      "genus": "Bos",
+      "species": "Bos taurus"
+    }
+  },
+  {
+    "id": "sus_scrofa_linnaeus",
+    "display": "wild boar",
+    "sci": "Sus scrofa Linnaeus, 1758",
+    "gbifKey": 7705930,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Artiodactyla",
+      "family": "Suidae",
+      "genus": "Sus",
+      "species": "Sus scrofa"
+    }
+  },
+  {
+    "id": "capra_aegagrus_erxleben",
+    "display": "wild goat",
+    "sci": "Capra aegagrus Erxleben, 1777",
+    "gbifKey": 4409366,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Artiodactyla",
+      "family": "Bovidae",
+      "genus": "Capra",
+      "species": "Capra hircus"
+    }
+  },
+  {
+    "id": "lama_glama__linnaeus",
+    "display": "llama",
+    "sci": "Lama glama (Linnaeus, 1758)",
+    "gbifKey": 5220190,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Artiodactyla",
+      "family": "Camelidae",
+      "genus": "Lama",
+      "species": "Lama glama"
+    }
+  },
+  {
+    "id": "sphyrna_lewini__griffith___smith",
+    "display": "Scalloped Hammerhead",
+    "sci": "Sphyrna lewini (Griffith & Smith, 1834)",
+    "gbifKey": 2418789,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Elasmobranchii",
+      "order": "Carcharhiniformes",
+      "family": "Sphyrnidae",
+      "genus": "Sphyrna",
+      "species": "Sphyrna lewini"
+    }
+  },
+  {
+    "id": "anolis_carolinensis_voigt",
+    "display": "green anole",
+    "sci": "Anolis carolinensis Voigt, 1832",
+    "gbifKey": 2466939,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Squamata",
+      "order": "",
+      "family": "Dactyloidae",
+      "genus": "Anolis",
+      "species": "Anolis carolinensis"
+    }
+  },
+  {
+    "id": "iguana_iguana__linnaeus",
+    "display": "Green iguana",
+    "sci": "Iguana iguana (Linnaeus, 1758)",
+    "gbifKey": 2459658,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Squamata",
+      "order": "",
+      "family": "Iguanidae",
+      "genus": "Iguana",
+      "species": "Iguana iguana"
+    }
+  },
+  {
+    "id": "cygnus_olor__j_f_gmelin",
+    "display": "Mute Swan",
+    "sci": "Cygnus olor (J.F.Gmelin, 1789)",
+    "gbifKey": 2498343,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Anseriformes",
+      "family": "Anatidae",
+      "genus": "Cygnus",
+      "species": "Cygnus olor"
+    }
+  },
+  {
+    "id": "rana_temporaria_linnaeus",
+    "display": "common frog",
+    "sci": "Rana temporaria Linnaeus, 1758",
+    "gbifKey": 2426805,
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Amphibia",
+      "order": "Anura",
+      "family": "Ranidae",
+      "genus": "Rana",
+      "species": "Rana temporaria"
+    }
+  }
+]

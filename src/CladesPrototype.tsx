@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-
+import SPECIES from './species_100_gbif.json';
 
 
 //
@@ -38,19 +38,6 @@ type PerSpeciesStats = {
 type AllStats = Record<string, PerSpeciesStats>; // keyed by species.id
 
 const STORAGE_KEY = 'clades_stats_v1';
-
-const SPECIES: Species[] = [
-  { id: 'homo_sapiens', display: 'Humano', sci: 'Homo sapiens', taxonomy:{phylum:'Chordata',class:'Mammalia',order:'Primates',family:'Hominidae',genus:'Homo',species:'Homo sapiens'}},
-  { id: 'balaenoptera_musculus', display: 'Ballena azul', sci: 'Balaenoptera musculus', taxonomy:{phylum:'Chordata',class:'Mammalia',order:'Cetartiodactyla',family:'Balaenopteridae',genus:'Balaenoptera',species:'Balaenoptera musculus'}},
-  /*{ id: 'loxodonta_africana', display: 'Elefante africano', sci: 'Loxodonta africana', taxonomy:{phylum:'Chordata',class:'Mammalia',order:'Proboscidea',family:'Elephantidae',genus:'Loxodonta',species:'Loxodonta africana'}},
-  { id: 'panthera_tigris', display: 'Tigre', sci: 'Panthera tigris', taxonomy:{phylum:'Chordata',class:'Mammalia',order:'Carnivora',family:'Felidae',genus:'Panthera',species:'Panthera tigris'}},
-  { id: 'ailuropoda_melanoleuca', display: 'Oso panda gigante', sci: 'Ailuropoda melanoleuca', taxonomy:{phylum:'Chordata',class:'Mammalia',order:'Carnivora',family:'Ursidae',genus:'Ailuropoda',species:'Ailuropoda melanoleuca'}},
-  { id: 'monodon_monoceros', display: 'Narval', sci: 'Monodon monoceros', taxonomy:{phylum:'Chordata',class:'Mammalia',order:'Cetartiodactyla',family:'Monodontidae',genus:'Monodon',species:'Monodon monoceros'}},
-  { id: 'carcharodon_carcharias', display: 'Tiburón blanco', sci: 'Carcharodon carcharias', taxonomy:{phylum:'Chordata',class:'Chondrichthyes',order:'Lamniformes',family:'Lamnidae',genus:'Carcharodon',species:'Carcharodon carcharias'}},
-  { id: 'haliaeetus_leucocephalus', display: 'Águila calva', sci: 'Haliaeetus leucocephalus', taxonomy:{phylum:'Chordata',class:'Aves',order:'Accipitriformes',family:'Accipitridae',genus:'Haliaeetus',species:'Haliaeetus leucocephalus'}},
-  { id: 'falco_peregrinus', display: 'Halcón peregrino', sci: 'Falco peregrinus', taxonomy:{phylum:'Chordata',class:'Aves',order:'Falconiformes',family:'Falconidae',genus:'Falco',species:'Falco peregrinus'}},
-  { id: 'danaus_plexippus', display: 'Mariposa monarca', sci: 'Danaus plexippus', taxonomy:{phylum:'Arthropoda',class:'Insecta',order:'Lepidoptera',family:'Nymphalidae',genus:'Danaus',species:'Danaus plexippus'}}*/
-];
 
 const RANKS: (keyof Taxonomy)[] = ['phylum','class','order','family','genus','species'];
 
@@ -253,6 +240,16 @@ export default function CladesPrototype(){
     // cada rango debe haberse acertado al menos una vez
     return RANKS.every(rank => s.correctByRank[rank] > 0);
   }
+
+  function getSuggestionsSimple(rank: keyof Taxonomy){
+    const pool = (optionsByRank[rank]||[]).filter(x=>x!==current?.taxonomy?.[rank]);
+    const shuffle = (a:string[])=>a.slice().sort(()=>Math.random()-0.5);
+    const picks = shuffle(pool).slice(0,9);
+    const correct = current?.taxonomy?.[rank];
+    if(correct) picks.splice(Math.floor(Math.random()*(picks.length+1)),0,correct);
+    return picks;
+  }
+
 
   function nextSpecies() {
     if (!current) return;
@@ -813,16 +810,7 @@ export default function CladesPrototype(){
                             alignItems: 'center',
                             justifyContent: 'center'
                           }}
-                          onClick={e => {
-                            e.preventDefault();
-                            const q = prompt(
-                              'Sugerencias para ' +
-                                rank +
-                                '\n\nOpciones: ' +
-                                (optionsByRank[rank] || []).slice(0, 10).join(', ')
-                            );
-                            if (q) handleInput(rank, q);
-                          }}
+                          onClick={e=>{e.preventDefault(); const list=getSuggestionsSimple(rank); const q=prompt('Opciones: '+list.join(', ')); if(q) handleInput(rank,q);}}
                         >
                           💡
                         </button>

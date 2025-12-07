@@ -1,0 +1,1302 @@
+[
+  {
+    "id": "Homo sapiens",
+    "display": "Humano",
+    "sci": "Homo sapiens",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Primates",
+      "family": "Hominidae",
+      "genus": "Homo",
+      "species": "Homo sapiens"
+    }
+  },
+  {
+    "id": "Pan troglodytes",
+    "display": "Chimpancé",
+    "sci": "Pan troglodytes",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Primates",
+      "family": "Hominidae",
+      "genus": "Pan",
+      "species": "Pan troglodytes"
+    }
+  },
+  {
+    "id": "Gorilla gorilla",
+    "display": "Gorila occidental",
+    "sci": "Gorilla gorilla",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Primates",
+      "family": "Hominidae",
+      "genus": "Gorilla",
+      "species": "Gorilla gorilla"
+    }
+  },
+  {
+    "id": "Panthera leo",
+    "display": "León",
+    "sci": "Panthera leo",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Felidae",
+      "genus": "Panthera",
+      "species": "Panthera leo"
+    }
+  },
+  {
+    "id": "Panthera tigris",
+    "display": "Tigre",
+    "sci": "Panthera tigris",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Felidae",
+      "genus": "Panthera",
+      "species": "Panthera tigris"
+    }
+  },
+  {
+    "id": "Panthera pardus",
+    "display": "Leopardo",
+    "sci": "Panthera pardus",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Felidae",
+      "genus": "Panthera",
+      "species": "Panthera pardus"
+    }
+  },
+  {
+    "id": "Panthera onca",
+    "display": "Jaguar",
+    "sci": "Panthera onca",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Felidae",
+      "genus": "Panthera",
+      "species": "Panthera onca"
+    }
+  },
+  {
+    "id": "Acinonyx jubatus",
+    "display": "Guepardo",
+    "sci": "Acinonyx jubatus",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Felidae",
+      "genus": "Acinonyx",
+      "species": "Acinonyx jubatus"
+    }
+  },
+  {
+    "id": "Ailuropoda melanoleuca",
+    "display": "Panda gigante",
+    "sci": "Ailuropoda melanoleuca",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Ursidae",
+      "genus": "Ailuropoda",
+      "species": "Ailuropoda melanoleuca"
+    }
+  },
+  {
+    "id": "Ursus arctos",
+    "display": "Oso pardo",
+    "sci": "Ursus arctos",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Ursidae",
+      "genus": "Ursus",
+      "species": "Ursus arctos"
+    }
+  },
+  {
+    "id": "Ursus maritimus",
+    "display": "Oso polar",
+    "sci": "Ursus maritimus",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Ursidae",
+      "genus": "Ursus",
+      "species": "Ursus maritimus"
+    }
+  },
+  {
+    "id": "Canis lupus",
+    "display": "Lobo",
+    "sci": "Canis lupus",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Canidae",
+      "genus": "Canis",
+      "species": "Canis lupus"
+    }
+  },
+  {
+    "id": "Vulpes vulpes",
+    "display": "Zorro rojo",
+    "sci": "Vulpes vulpes",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Canidae",
+      "genus": "Vulpes",
+      "species": "Vulpes vulpes"
+    }
+  },
+  {
+    "id": "Felis catus",
+    "display": "Gato doméstico",
+    "sci": "Felis catus",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Felidae",
+      "genus": "Felis",
+      "species": "Felis catus"
+    }
+  },
+  {
+    "id": "Loxodonta africana",
+    "display": "Elefante africano",
+    "sci": "Loxodonta africana",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Proboscidea",
+      "family": "Elephantidae",
+      "genus": "Loxodonta",
+      "species": "Loxodonta africana"
+    }
+  },
+  {
+    "id": "Elephas maximus",
+    "display": "Elefante asiático",
+    "sci": "Elephas maximus",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Proboscidea",
+      "family": "Elephantidae",
+      "genus": "Elephas",
+      "species": "Elephas maximus"
+    }
+  },
+  {
+    "id": "Giraffa camelopardalis",
+    "display": "Jirafa",
+    "sci": "Giraffa camelopardalis",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Artiodactyla",
+      "family": "Giraffidae",
+      "genus": "Giraffa",
+      "species": "Giraffa camelopardalis"
+    }
+  },
+  {
+    "id": "Hippopotamus amphibius",
+    "display": "Hipopótamo",
+    "sci": "Hippopotamus amphibius",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Artiodactyla",
+      "family": "Hippopotamidae",
+      "genus": "Hippopotamus",
+      "species": "Hippopotamus amphibius"
+    }
+  },
+  {
+    "id": "Equus ferus",
+    "display": "Caballo",
+    "sci": "Equus ferus",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Perissodactyla",
+      "family": "Equidae",
+      "genus": "Equus",
+      "species": "Equus ferus"
+    }
+  },
+  {
+    "id": "Equus zebra",
+    "display": "Cebra",
+    "sci": "Equus zebra",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Perissodactyla",
+      "family": "Equidae",
+      "genus": "Equus",
+      "species": "Equus zebra"
+    }
+  },
+  {
+    "id": "Sus scrofa",
+    "display": "Jabalí",
+    "sci": "Sus scrofa",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Artiodactyla",
+      "family": "Suidae",
+      "genus": "Sus",
+      "species": "Sus scrofa"
+    }
+  },
+  {
+    "id": "Bos taurus",
+    "display": "Vaca",
+    "sci": "Bos taurus",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Artiodactyla",
+      "family": "Bovidae",
+      "genus": "Bos",
+      "species": "Bos taurus"
+    }
+  },
+  {
+    "id": "Ovis aries",
+    "display": "Oveja",
+    "sci": "Ovis aries",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Artiodactyla",
+      "family": "Bovidae",
+      "genus": "Ovis",
+      "species": "Ovis aries"
+    }
+  },
+  {
+    "id": "Capra pyrenaica",
+    "display": "Cabra montés ibérica",
+    "sci": "Capra pyrenaica",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Artiodactyla",
+      "family": "Bovidae",
+      "genus": "Capra",
+      "species": "Capra pyrenaica"
+    }
+  },
+  {
+    "id": "Camelus dromedarius",
+    "display": "Dromedario",
+    "sci": "Camelus dromedarius",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Artiodactyla",
+      "family": "Camelidae",
+      "genus": "Camelus",
+      "species": "Camelus dromedarius"
+    }
+  },
+  {
+    "id": "Delphinus delphis",
+    "display": "Delfín común",
+    "sci": "Delphinus delphis",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Cetacea",
+      "family": "Delphinidae",
+      "genus": "Delphinus",
+      "species": "Delphinus delphis"
+    }
+  },
+  {
+    "id": "Orcinus orca",
+    "display": "Orca",
+    "sci": "Orcinus orca",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Cetacea",
+      "family": "Delphinidae",
+      "genus": "Orcinus",
+      "species": "Orcinus orca"
+    }
+  },
+  {
+    "id": "Balaenoptera musculus",
+    "display": "Ballena azul",
+    "sci": "Balaenoptera musculus",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Cetacea",
+      "family": "Balaenopteridae",
+      "genus": "Balaenoptera",
+      "species": "Balaenoptera musculus"
+    }
+  },
+  {
+    "id": "Megaptera novaeangliae",
+    "display": "Ballena jorobada",
+    "sci": "Megaptera novaeangliae",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Cetacea",
+      "family": "Balaenopteridae",
+      "genus": "Megaptera",
+      "species": "Megaptera novaeangliae"
+    }
+  },
+  {
+    "id": "Monodon monoceros",
+    "display": "Narval",
+    "sci": "Monodon monoceros",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Cetacea",
+      "family": "Monodontidae",
+      "genus": "Monodon",
+      "species": "Monodon monoceros"
+    }
+  },
+  {
+    "id": "Carcharodon carcharias",
+    "display": "Tiburón blanco",
+    "sci": "Carcharodon carcharias",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Elasmobranchii",
+      "order": "Lamniformes",
+      "family": "Lamnidae",
+      "genus": "Carcharodon",
+      "species": "Carcharodon carcharias"
+    }
+  },
+  {
+    "id": "Rhincodon typus",
+    "display": "Tiburón ballena",
+    "sci": "Rhincodon typus",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Elasmobranchii",
+      "order": "Orectolobiformes",
+      "family": "Rhincodontidae",
+      "genus": "Rhincodon",
+      "species": "Rhincodon typus"
+    }
+  },
+  {
+    "id": "Sphyrna zygaena",
+    "display": "Tiburón martillo",
+    "sci": "Sphyrna zygaena",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Elasmobranchii",
+      "order": "Carcharhiniformes",
+      "family": "Sphyrnidae",
+      "genus": "Sphyrna",
+      "species": "Sphyrna zygaena"
+    }
+  },
+  {
+    "id": "Chelonia mydas",
+    "display": "Tortuga verde",
+    "sci": "Chelonia mydas",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Testudines",
+      "order": "",
+      "family": "Cheloniidae",
+      "genus": "Chelonia",
+      "species": "Chelonia mydas"
+    }
+  },
+  {
+    "id": "Dermochelys coriacea",
+    "display": "Tortuga laúd",
+    "sci": "Dermochelys coriacea",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Testudines",
+      "order": "",
+      "family": "Dermochelyidae",
+      "genus": "Dermochelys",
+      "species": "Dermochelys coriacea"
+    }
+  },
+  {
+    "id": "Crocodylus niloticus",
+    "display": "Cocodrilo del Nilo",
+    "sci": "Crocodylus niloticus",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Crocodylia",
+      "order": "",
+      "family": "Crocodylidae",
+      "genus": "Crocodylus",
+      "species": "Crocodylus niloticus"
+    }
+  },
+  {
+    "id": "Alligator mississippiensis",
+    "display": "Aligátor americano",
+    "sci": "Alligator mississippiensis",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Crocodylia",
+      "order": "",
+      "family": "Alligatoridae",
+      "genus": "Alligator",
+      "species": "Alligator mississippiensis"
+    }
+  },
+  {
+    "id": "Varanus komodoensis",
+    "display": "Dragón de Komodo",
+    "sci": "Varanus komodoensis",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Squamata",
+      "order": "",
+      "family": "Varanidae",
+      "genus": "Varanus",
+      "species": "Varanus komodoensis"
+    }
+  },
+  {
+    "id": "Iguana iguana",
+    "display": "Iguana verde",
+    "sci": "Iguana iguana",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Squamata",
+      "order": "",
+      "family": "Iguanidae",
+      "genus": "Iguana",
+      "species": "Iguana iguana"
+    }
+  },
+  {
+    "id": "Ophiophagus hannah",
+    "display": "Cobra real",
+    "sci": "Ophiophagus hannah",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Squamata",
+      "order": "",
+      "family": "Elapidae",
+      "genus": "Ophiophagus",
+      "species": "Ophiophagus hannah"
+    }
+  },
+  {
+    "id": "Falco peregrinus",
+    "display": "Halcón peregrino",
+    "sci": "Falco peregrinus",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Falconiformes",
+      "family": "Falconidae",
+      "genus": "Falco",
+      "species": "Falco peregrinus"
+    }
+  },
+  {
+    "id": "Aquila chrysaetos",
+    "display": "Águila real",
+    "sci": "Aquila chrysaetos",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Accipitriformes",
+      "family": "Accipitridae",
+      "genus": "Aquila",
+      "species": "Aquila chrysaetos"
+    }
+  },
+  {
+    "id": "Struthio camelus",
+    "display": "Avestruz",
+    "sci": "Struthio camelus",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Struthioniformes",
+      "family": "Struthionidae",
+      "genus": "Struthio",
+      "species": "Struthio camelus"
+    }
+  },
+  {
+    "id": "Pavo cristatus",
+    "display": "Pavo real",
+    "sci": "Pavo cristatus",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Galliformes",
+      "family": "Phasianidae",
+      "genus": "Pavo",
+      "species": "Pavo cristatus"
+    }
+  },
+  {
+    "id": "Corvus corax",
+    "display": "Cuervo grande",
+    "sci": "Corvus corax",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Passeriformes",
+      "family": "Corvidae",
+      "genus": "Corvus",
+      "species": "Corvus corax"
+    }
+  },
+  {
+    "id": "Gyps fulvus",
+    "display": "Buitre leonado",
+    "sci": "Gyps fulvus",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Accipitriformes",
+      "family": "Accipitridae",
+      "genus": "Gyps",
+      "species": "Gyps fulvus"
+    }
+  },
+  {
+    "id": "Aptenodytes forsteri",
+    "display": "Pingüino emperador",
+    "sci": "Aptenodytes forsteri",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Sphenisciformes",
+      "family": "Spheniscidae",
+      "genus": "Aptenodytes",
+      "species": "Aptenodytes forsteri"
+    }
+  },
+  {
+    "id": "Cygnus olor",
+    "display": "Cisne blanco",
+    "sci": "Cygnus olor",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Anseriformes",
+      "family": "Anatidae",
+      "genus": "Cygnus",
+      "species": "Cygnus olor"
+    }
+  },
+  {
+    "id": "Anas platyrhynchos",
+    "display": "Ánade real",
+    "sci": "Anas platyrhynchos",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Anseriformes",
+      "family": "Anatidae",
+      "genus": "Anas",
+      "species": "Anas platyrhynchos"
+    }
+  },
+  {
+    "id": "Passer domesticus",
+    "display": "Gorrión común",
+    "sci": "Passer domesticus",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Passeriformes",
+      "family": "Passeridae",
+      "genus": "Passer",
+      "species": "Passer domesticus"
+    }
+  },
+  {
+    "id": "Pelophylax perezi",
+    "display": "Rana común",
+    "sci": "Pelophylax perezi",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Amphibia",
+      "order": "Anura",
+      "family": "Ranidae",
+      "genus": "Pelophylax",
+      "species": "Pelophylax perezi"
+    }
+  },
+  {
+    "id": "Salamandra salamandra",
+    "display": "Salamandra común",
+    "sci": "Salamandra salamandra",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Amphibia",
+      "order": "Caudata",
+      "family": "Salamandridae",
+      "genus": "Salamandra",
+      "species": "Salamandra salamandra"
+    }
+  },
+  {
+    "id": "Ambystoma mexicanum",
+    "display": "Ajolote",
+    "sci": "Ambystoma mexicanum",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Amphibia",
+      "order": "Caudata",
+      "family": "Ambystomatidae",
+      "genus": "Ambystoma",
+      "species": "Ambystoma mexicanum"
+    }
+  },
+  {
+    "id": "Phoca vitulina",
+    "display": "Foca común",
+    "sci": "Phoca vitulina",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Phocidae",
+      "genus": "Phoca",
+      "species": "Phoca vitulina"
+    }
+  },
+  {
+    "id": "Otaria byronia",
+    "display": "León marino sudamericano",
+    "sci": "Otaria byronia",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Otariidae",
+      "genus": "Otaria",
+      "species": "Otaria byronia"
+    }
+  },
+  {
+    "id": "Odobenus rosmarus",
+    "display": "Morsa",
+    "sci": "Odobenus rosmarus",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Odobenidae",
+      "genus": "Odobenus",
+      "species": "Odobenus rosmarus"
+    }
+  },
+  {
+    "id": "Macropus rufus",
+    "display": "Canguro rojo",
+    "sci": "Macropus rufus",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Diprotodontia",
+      "family": "Macropodidae",
+      "genus": "Macropus",
+      "species": "Macropus rufus"
+    }
+  },
+  {
+    "id": "Phascolarctos cinereus",
+    "display": "Koala",
+    "sci": "Phascolarctos cinereus",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Diprotodontia",
+      "family": "Phascolarctidae",
+      "genus": "Phascolarctos",
+      "species": "Phascolarctos cinereus"
+    }
+  },
+  {
+    "id": "Ornithorhynchus anatinus",
+    "display": "Ornitorrinco",
+    "sci": "Ornithorhynchus anatinus",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Monotremata",
+      "family": "Ornithorhynchidae",
+      "genus": "Ornithorhynchus",
+      "species": "Ornithorhynchus anatinus"
+    }
+  },
+  {
+    "id": "Tachyglossus aculeatus",
+    "display": "Equidna",
+    "sci": "Tachyglossus aculeatus",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Monotremata",
+      "family": "Tachyglossidae",
+      "genus": "Tachyglossus",
+      "species": "Tachyglossus aculeatus"
+    }
+  },
+  {
+    "id": "Rattus norvegicus",
+    "display": "Rata parda",
+    "sci": "Rattus norvegicus",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Rodentia",
+      "family": "Muridae",
+      "genus": "Rattus",
+      "species": "Rattus norvegicus"
+    }
+  },
+  {
+    "id": "Mus musculus",
+    "display": "Ratón de laboratorio",
+    "sci": "Mus musculus",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Rodentia",
+      "family": "Muridae",
+      "genus": "Mus",
+      "species": "Mus musculus"
+    }
+  },
+  {
+    "id": "Mustela nivalis",
+    "display": "Comadreja",
+    "sci": "Mustela nivalis",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Mustelidae",
+      "genus": "Mustela",
+      "species": "Mustela nivalis"
+    }
+  },
+  {
+    "id": "Rhinoceros unicornis",
+    "display": "Rinoceronte indio",
+    "sci": "Rhinoceros unicornis",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Perissodactyla",
+      "family": "Rhinocerotidae",
+      "genus": "Rhinoceros",
+      "species": "Rhinoceros unicornis"
+    }
+  },
+  {
+    "id": "Diceros bicornis",
+    "display": "Rinoceronte negro",
+    "sci": "Diceros bicornis",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Perissodactyla",
+      "family": "Rhinocerotidae",
+      "genus": "Diceros",
+      "species": "Diceros bicornis"
+    }
+  },
+  {
+    "id": "Gavialis gangeticus",
+    "display": "Gavial",
+    "sci": "Gavialis gangeticus",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Crocodylia",
+      "order": "",
+      "family": "Gavialidae",
+      "genus": "Gavialis",
+      "species": "Gavialis gangeticus"
+    }
+  },
+  {
+    "id": "Columba livia",
+    "display": "Paloma bravía",
+    "sci": "Columba livia",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Columbiformes",
+      "family": "Columbidae",
+      "genus": "Columba",
+      "species": "Columba livia"
+    }
+  },
+  {
+    "id": "Tyto alba",
+    "display": "Lechuza común",
+    "sci": "Tyto alba",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Strigiformes",
+      "family": "Tytonidae",
+      "genus": "Tyto",
+      "species": "Tyto alba"
+    }
+  },
+  {
+    "id": "Pelecanus onocrotalus",
+    "display": "Pelícano blanco",
+    "sci": "Pelecanus onocrotalus",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Pelecaniformes",
+      "family": "Pelecanidae",
+      "genus": "Pelecanus",
+      "species": "Pelecanus onocrotalus"
+    }
+  },
+  {
+    "id": "Ara macao",
+    "display": "Guacamayo rojo",
+    "sci": "Ara macao",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Psittaciformes",
+      "family": "Psittacidae",
+      "genus": "Ara",
+      "species": "Ara macao"
+    }
+  },
+  {
+    "id": "Myiopsitta monachus",
+    "display": "Cotorra argentina",
+    "sci": "Myiopsitta monachus",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Psittaciformes",
+      "family": "Psittacidae",
+      "genus": "Myiopsitta",
+      "species": "Myiopsitta monachus"
+    }
+  },
+  {
+    "id": "Phoenicopterus roseus",
+    "display": "Flamenco rosado",
+    "sci": "Phoenicopterus roseus",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Phoenicopteriformes",
+      "family": "Phoenicopteridae",
+      "genus": "Phoenicopterus",
+      "species": "Phoenicopterus roseus"
+    }
+  },
+  {
+    "id": "Danaus plexippus",
+    "display": "Mariposa monarca",
+    "sci": "Danaus plexippus",
+    "taxonomy": {
+      "phylum": "Arthropoda",
+      "class": "Insecta",
+      "order": "Lepidoptera",
+      "family": "Nymphalidae",
+      "genus": "Danaus",
+      "species": "Danaus plexippus"
+    }
+  },
+  {
+    "id": "Apis mellifera",
+    "display": "Abeja europea",
+    "sci": "Apis mellifera",
+    "taxonomy": {
+      "phylum": "Arthropoda",
+      "class": "Insecta",
+      "order": "Hymenoptera",
+      "family": "Apidae",
+      "genus": "Apis",
+      "species": "Apis mellifera"
+    }
+  },
+  {
+    "id": "Atta cephalotes",
+    "display": "Hormiga cortadora de hojas",
+    "sci": "Atta cephalotes",
+    "taxonomy": {
+      "phylum": "Arthropoda",
+      "class": "Insecta",
+      "order": "Hymenoptera",
+      "family": "Formicidae",
+      "genus": "Atta",
+      "species": "Atta cephalotes"
+    }
+  },
+  {
+    "id": "Latrodectus mactans",
+    "display": "Viuda negra",
+    "sci": "Latrodectus mactans",
+    "taxonomy": {
+      "phylum": "Arthropoda",
+      "class": "Arachnida",
+      "order": "Araneae",
+      "family": "Theridiidae",
+      "genus": "Latrodectus",
+      "species": "Latrodectus mactans"
+    }
+  },
+  {
+    "id": "Lycosa tarantula",
+    "display": "Tarántula europea",
+    "sci": "Lycosa tarantula",
+    "taxonomy": {
+      "phylum": "Arthropoda",
+      "class": "Arachnida",
+      "order": "Araneae",
+      "family": "Lycosidae",
+      "genus": "Lycosa",
+      "species": "Lycosa tarantula"
+    }
+  },
+  {
+    "id": "Buthus occitanus",
+    "display": "Escorpión",
+    "sci": "Buthus occitanus",
+    "taxonomy": {
+      "phylum": "Arthropoda",
+      "class": "Arachnida",
+      "order": "Scorpiones",
+      "family": "Buthidae",
+      "genus": "Buthus",
+      "species": "Buthus occitanus"
+    }
+  },
+  {
+    "id": "Carcinus maenas",
+    "display": "Cangrejo verde",
+    "sci": "Carcinus maenas",
+    "taxonomy": {
+      "phylum": "Arthropoda",
+      "class": "Malacostraca",
+      "order": "Decapoda",
+      "family": "Carcinidae",
+      "genus": "Carcinus",
+      "species": "Carcinus maenas"
+    }
+  },
+  {
+    "id": "Palinurus elephas",
+    "display": "Langosta europea",
+    "sci": "Palinurus elephas",
+    "taxonomy": {
+      "phylum": "Arthropoda",
+      "class": "Malacostraca",
+      "order": "Decapoda",
+      "family": "Palinuridae",
+      "genus": "Palinurus",
+      "species": "Palinurus elephas"
+    }
+  },
+  {
+    "id": "Homarus americanus",
+    "display": "Bogavante americano",
+    "sci": "Homarus americanus",
+    "taxonomy": {
+      "phylum": "Arthropoda",
+      "class": "Malacostraca",
+      "order": "Decapoda",
+      "family": "Nephropidae",
+      "genus": "Homarus",
+      "species": "Homarus americanus"
+    }
+  },
+  {
+    "id": "Octopus vulgaris",
+    "display": "Pulpo común",
+    "sci": "Octopus vulgaris",
+    "taxonomy": {
+      "phylum": "Mollusca",
+      "class": "Cephalopoda",
+      "order": "Octopoda",
+      "family": "Octopodidae",
+      "genus": "Octopus",
+      "species": "Octopus vulgaris"
+    }
+  },
+  {
+    "id": "Architeuthis dux",
+    "display": "Calamar gigante",
+    "sci": "Architeuthis dux",
+    "taxonomy": {
+      "phylum": "Mollusca",
+      "class": "Cephalopoda",
+      "order": "Oegopsida",
+      "family": "Architeuthidae",
+      "genus": "Architeuthis",
+      "species": "Architeuthis dux"
+    }
+  },
+  {
+    "id": "Nautilus pompilius",
+    "display": "Nautilo",
+    "sci": "Nautilus pompilius",
+    "taxonomy": {
+      "phylum": "Mollusca",
+      "class": "Cephalopoda",
+      "order": "Nautilida",
+      "family": "Nautilidae",
+      "genus": "Nautilus",
+      "species": "Nautilus pompilius"
+    }
+  },
+  {
+    "id": "Aplysia californica",
+    "display": "Liebre de mar",
+    "sci": "Aplysia californica",
+    "taxonomy": {
+      "phylum": "Mollusca",
+      "class": "Gastropoda",
+      "order": "Aplysiida",
+      "family": "Aplysiidae",
+      "genus": "Aplysia",
+      "species": "Aplysia californica"
+    }
+  },
+  {
+    "id": "Electrophorus electricus",
+    "display": "Anguila eléctrica",
+    "sci": "Electrophorus electricus",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "",
+      "order": "Gymnotiformes",
+      "family": "Gymnotidae",
+      "genus": "Electrophorus",
+      "species": "Electrophorus electricus"
+    }
+  },
+  {
+    "id": "Limulus polyphemus",
+    "display": "Cangrejo herradura",
+    "sci": "Limulus polyphemus",
+    "taxonomy": {
+      "phylum": "Arthropoda",
+      "class": "Merostomata",
+      "order": "Xiphosurida",
+      "family": "Limulidae",
+      "genus": "Limulus",
+      "species": "Limulus polyphemus"
+    }
+  },
+  {
+    "id": "Salmo salar",
+    "display": "Salmón común",
+    "sci": "Salmo salar",
+    "taxonomy": {
+      "phylum": "Chordata",
+      "class": "",
+      "order": "Salmoniformes",
+      "family": "Salmonidae",
+      "genus": "Salmo",
+      "species": "Salmo salar"
+    }
+  },
+  {
+    "id": "Physalia physalis",
+    "display": "Carabela portuguesa",
+    "sci": "Physalia physalis",
+    "taxonomy": {
+      "phylum": "Cnidaria",
+      "class": "Hydrozoa",
+      "order": "Siphonophorae",
+      "family": "Physaliidae",
+      "genus": "Physalia",
+      "species": "Physalia physalis"
+    }
+  },
+  {
+    "id": "Hydra vulgaris",
+    "display": "Hidra",
+    "sci": "Hydra vulgaris",
+    "taxonomy": {
+      "phylum": "Cnidaria",
+      "class": "Hydrozoa",
+      "order": "Anthoathecata",
+      "family": "Hydridae",
+      "genus": "Hydra",
+      "species": "Hydra vulgaris"
+    }
+  },
+  {
+    "id": "Nematostella vectensis",
+    "display": "Anémona estrella",
+    "sci": "Nematostella vectensis",
+    "taxonomy": {
+      "phylum": "Cnidaria",
+      "class": "Anthozoa",
+      "order": "Actiniaria",
+      "family": "Edwardsiidae",
+      "genus": "Nematostella",
+      "species": "Nematostella vectensis"
+    }
+  },
+  {
+    "id": "Acanthaster planci",
+    "display": "Estrella corona de espinas",
+    "sci": "Acanthaster planci",
+    "taxonomy": {
+      "phylum": "Echinodermata",
+      "class": "Asteroidea",
+      "order": "Valvatida",
+      "family": "Acanthasteridae",
+      "genus": "Acanthaster",
+      "species": "Acanthaster planci"
+    }
+  },
+  {
+    "id": "Strongylocentrotus purpuratus",
+    "display": "Erizo púrpura",
+    "sci": "Strongylocentrotus purpuratus",
+    "taxonomy": {
+      "phylum": "Echinodermata",
+      "class": "Echinoidea",
+      "order": "Camarodonta",
+      "family": "Strongylocentrotidae",
+      "genus": "Strongylocentrotus",
+      "species": "Strongylocentrotus purpuratus"
+    }
+  },
+  {
+    "id": "Paracentrotus lividus",
+    "display": "Erizo de mar común",
+    "sci": "Paracentrotus lividus",
+    "taxonomy": {
+      "phylum": "Echinodermata",
+      "class": "Echinoidea",
+      "order": "Camarodonta",
+      "family": "Parechinidae",
+      "genus": "Paracentrotus",
+      "species": "Paracentrotus lividus"
+    }
+  },
+  {
+    "id": "Holothuria forskali",
+    "display": "Pepino de mar",
+    "sci": "Holothuria forskali",
+    "taxonomy": {
+      "phylum": "Echinodermata",
+      "class": "Holothuroidea",
+      "order": "Holothuriida",
+      "family": "Holothuriidae",
+      "genus": "Holothuria",
+      "species": "Holothuria forskali"
+    }
+  },
+  {
+    "id": "Eucidaris tribuloides",
+    "display": "Erizo lápiz",
+    "sci": "Eucidaris tribuloides",
+    "taxonomy": {
+      "phylum": "Echinodermata",
+      "class": "Echinoidea",
+      "order": "Cidaroida",
+      "family": "Cidaridae",
+      "genus": "Eucidaris",
+      "species": "Eucidaris tribuloides"
+    }
+  },
+  {
+    "id": "Euplectella aspergillum",
+    "display": "Esponja Venus",
+    "sci": "Euplectella aspergillum",
+    "taxonomy": {
+      "phylum": "Porifera",
+      "class": "Hexactinellida",
+      "order": "Lyssacinosida",
+      "family": "Euplectellidae",
+      "genus": "Euplectella",
+      "species": "Euplectella aspergillum"
+    }
+  },
+  {
+    "id": "Spongia officinalis",
+    "display": "Esponja de baño",
+    "sci": "Spongia officinalis",
+    "taxonomy": {
+      "phylum": "Porifera",
+      "class": "Demospongiae",
+      "order": "Dictyoceratida",
+      "family": "Spongiidae",
+      "genus": "Spongia",
+      "species": "Spongia officinalis"
+    }
+  },
+  {
+    "id": "Sabella spallanzanii",
+    "display": "Gusano pluma",
+    "sci": "Sabella spallanzanii",
+    "taxonomy": {
+      "phylum": "Annelida",
+      "class": "Polychaeta",
+      "order": "Sabellida",
+      "family": "Sabellidae",
+      "genus": "Sabella",
+      "species": "Sabella spallanzanii"
+    }
+  },
+  {
+    "id": "Platynereis dumerilii",
+    "display": "Gusano poliqueto",
+    "sci": "Platynereis dumerilii",
+    "taxonomy": {
+      "phylum": "Annelida",
+      "class": "Polychaeta",
+      "order": "Phyllodocida",
+      "family": "Nereididae",
+      "genus": "Platynereis",
+      "species": "Platynereis dumerilii"
+    }
+  }
+]
