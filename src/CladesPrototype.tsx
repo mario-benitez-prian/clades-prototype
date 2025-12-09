@@ -188,20 +188,24 @@ export default function CladesPrototype(){
   // update stats helper after an attempt
   function recordAttemptInStats(speciesId: string, corrects: Record<keyof Taxonomy, boolean>){
     setStats(prev => {
-      const copy = { ...prev };
-      if(!copy[speciesId]) copy[speciesId] = makeEmptyPerSpeciesStats();
-      const entry = { ...copy[speciesId] };
-      entry.attempts = (entry.attempts || 0) + 1;
-      // if all ranks true -> full correct
-      const allTrue = RANKS.every(r => !!corrects[r]);
-      if(allTrue) entry.correctFull = (entry.correctFull||0) + 1;
-      // increment per-rank counts
-      const byRank = { ...entry.correctByRank };
-      RANKS.forEach(r => { byRank[r] = (byRank[r]||0) + (corrects[r] ? 1 : 0); });
-      entry.correctByRank = byRank;
-      copy[speciesId] = entry;
-      return copy;
-    });
+        const copy = { ...prev };
+        if(!copy[speciesId]) copy[speciesId] = makeEmptyPerSpeciesStats();
+        const entry = { ...copy[speciesId] };
+
+        entry.attempts = (entry.attempts || 0) + 1;
+
+        // si todo correcto -> full correct
+        const allTrue = RANKS.every(r => !!corrects[r]);
+        if(allTrue) entry.correctFull = (entry.correctFull||0) + 1;
+
+        // Nuevo: registrar solo si el rango se acertó en este intento
+        const byRank: Record<keyof Taxonomy, number> = {} as any;
+        RANKS.forEach(r => { byRank[r] = corrects[r] ? 1 : 0; });
+        entry.correctByRank = byRank;
+
+        copy[speciesId] = entry;
+        return copy;
+      });
   }
 
   function submit(){
@@ -319,6 +323,7 @@ export default function CladesPrototype(){
   const profileData = useMemo(()=>{
     const playedSpecies = Object.values(stats).filter(s => s.attempts > 0).length;
     const speciesCorrectAll = Object.values(stats).filter(s => s.attempts > 0 && s.correctFull > 0).length;
+    
     // per-rank accuracy: sum corrects / sum attempts
     let rankTotals: Record<keyof Taxonomy, { correct:number; attempts:number }> = {} as any;
     RANKS.forEach(r => rankTotals[r] = { correct:0, attempts:0 });
@@ -330,6 +335,7 @@ export default function CladesPrototype(){
         });
       }
     });
+
     const rankPct: Record<keyof Taxonomy, number> = {} as any;
     RANKS.forEach(r => {
       const totals = rankTotals[r];
@@ -352,6 +358,17 @@ export default function CladesPrototype(){
       if(bb === -1) return -1;
       return aa - bb;
     });
+
+    //--- Lista de especies jugadas ---
+
+    // Lista de especies jugadas
+    const playedSpeciesList = SPECIES.map(sp => {
+      const s = stats[sp.id] || makeEmptyPerSpeciesStats();
+      const attempts = s.attempts || 0;
+      const correctCount = RANKS.reduce((acc, r) => acc + ((s.correctByRank[r] || 0) > 0 ? 1 : 0), 0);
+      return { species: sp, attempts, correctCount };
+    }).filter(item => item.attempts > 0)
+      .sort((a, b) => a.correctCount - b.correctCount);
 
     // --- NUEVO: construir la lista de especies jugadas con fallos ---
     // Para cada especie tomamos su entry en stats y contamos cuántas categorías
@@ -378,7 +395,7 @@ export default function CladesPrototype(){
     // ordenar peor → mejor (menos aciertos primero)
     .sort((a, b) => a.correctCount - b.correctCount);
 
-    return { playedSpecies, totalSpecies: SPECIES.length, speciesCorrectAll, rankPct, speciesList, failedSpeciesList };
+    return { playedSpecies, totalSpecies: SPECIES.length, speciesCorrectAll, rankPct, speciesList, playedSpeciesList, failedSpeciesList };
   },[stats]);
 
 
@@ -631,10 +648,10 @@ export default function CladesPrototype(){
             <div style={{marginTop:18}}>
               <div className="small">Juega a las especies que aún no dominas</div>
               <div style={{marginTop:8}}>
-                {(!profileData || !profileData.failedSpeciesList || profileData.failedSpeciesList.length === 0) ? (
+                {(!profileData || !profileData.playedSpeciesList || profileData.playedSpeciesList.length === 0) ? (
                   <div className="small" style={{marginTop:6}}>¡Perfecto! No hay especies con errores aún.</div>
                 ) : (
-                  profileData.failedSpeciesList.map(item => (
+                  profileData.playedSpeciesList.map(item => (
                     <div className="species-row" key={item.species.id}>
                       <div className="species-left" style={{display:'flex',gap:12,alignItems:'center'}}>
                         <div style={{width:10,height:10,borderRadius:3,background:'#e6eefc'}} />
@@ -659,10 +676,15 @@ export default function CladesPrototype(){
 
                       <div style={{display:'flex',gap:8,alignItems:'center'}}>
                         <button className="ghost" onClick={()=>{
+        
+                          // limpiar inputs y feedback para que la pantalla de juego se reinicie
+                          setAnswers({ phylum:'', class:'', order:'', family:'', genus:'', species:'' });
+                          setLastResult(null);
+                          setScreen('game');
                           // practice this species: set as current and remove from remaining
                           setCurrent(item.species);
-                          setRemaining(prev => prev.filter(p=>p.id !== item.species.id));
-                          setScreen('game');
+                          console.log(item.species);
+
                         }}> Practicar </button>
                       </div>
                     </div>
