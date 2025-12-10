@@ -33,6 +33,7 @@ type PerSpeciesStats = {
   attempts: number;
   correctFull: number; // number of times all ranks correct
   correctByRank: Record<keyof Taxonomy, number>; // counts of corrects by rank
+  lastAttemptByRank: Record<keyof Taxonomy, boolean>; // resultado del último intento (true = acierto)
 };
 
 type AllStats = Record<string, PerSpeciesStats>; // keyed by species.id
@@ -61,8 +62,12 @@ function shuffle<T>(arr: T[]): T[] {
 // helpers to initialize per-species stats
 function makeEmptyPerSpeciesStats(): PerSpeciesStats {
   const byRank = {} as Record<keyof Taxonomy, number>;
-  RANKS.forEach(r => byRank[r] = 0);
-  return { attempts: 0, correctFull: 0, correctByRank: byRank };
+  const lastAttempt = {} as Record<keyof Taxonomy, boolean>;
+  RANKS.forEach(r => {
+    byRank[r] = 0;
+    lastAttempt[r] = false;
+  });
+  return { attempts: 0, correctFull: 0, correctByRank: byRank, lastAttemptByRank: lastAttempt };
 }
 
 export default function CladesPrototype(){
@@ -203,6 +208,11 @@ export default function CladesPrototype(){
         RANKS.forEach(r => { byRank[r] = corrects[r] ? 1 : 0; });
         entry.correctByRank = byRank;
 
+        // guardar resultado del último intento por rango (true = acierto, false = fallo)
+        const lastAttempt: Record<keyof Taxonomy, boolean> = { ...entry.lastAttemptByRank };
+        RANKS.forEach(r => { lastAttempt[r] = !!corrects[r]; });
+        entry.lastAttemptByRank = lastAttempt;
+
         copy[speciesId] = entry;
         return copy;
       });
@@ -324,6 +334,24 @@ export default function CladesPrototype(){
     const playedSpecies = Object.values(stats).filter(s => s.attempts > 0).length;
     const speciesCorrectAll = Object.values(stats).filter(s => s.attempts > 0 && s.correctFull > 0).length;
     
+    // Nuevo: contar cuántas especies tienen cada rango acertado EN EL ÚLTIMO INTENTO
+    const rankCorrectCounts: Record<keyof Taxonomy, number> = {} as any;
+    RANKS.forEach(r => rankCorrectCounts[r] = 0);
+
+    SPECIES.forEach(sp => {
+      const s = stats[sp.id] || makeEmptyPerSpeciesStats();
+      RANKS.forEach(r => {
+        if (s.lastAttemptByRank && s.lastAttemptByRank[r]) rankCorrectCounts[r] += 1;
+      });
+    });
+
+    // Convertimos a porcentaje sobre el total de especies en el dataset
+    const rankPct: Record<keyof Taxonomy, number> = {} as any;
+    RANKS.forEach(r => {
+      rankPct[r] = SPECIES.length > 0 ? (rankCorrectCounts[r] / SPECIES.length) * 100 : 0;
+    });
+    /*
+    Antigua forma de calcular los porcentajes basado en total de intentos
     // per-rank accuracy: sum corrects / sum attempts
     let rankTotals: Record<keyof Taxonomy, { correct:number; attempts:number }> = {} as any;
     RANKS.forEach(r => rankTotals[r] = { correct:0, attempts:0 });
@@ -341,6 +369,7 @@ export default function CladesPrototype(){
       const totals = rankTotals[r];
       rankPct[r] = totals.attempts > 0 ? (totals.correct / totals.attempts) * 100 : 0;
     });
+    */
 
     // species list sorted by performance (worst first). Use full-correct ratio (lower = worse)
     const speciesList = SPECIES.map(sp => {
@@ -370,7 +399,7 @@ export default function CladesPrototype(){
     }).filter(item => item.attempts > 0)
       .sort((a, b) => a.correctCount - b.correctCount);
 
-    // --- NUEVO: construir la lista de especies jugadas con fallos ---
+    /*// --- NUEVO: construir la lista de especies jugadas con fallos ---
     // Para cada especie tomamos su entry en stats y contamos cuántas categorías
     // han sido acertadas al menos una vez (correctByRank[r] > 0).
     // Solo incluimos especies con attempts > 0 y correctCount < 6 (es decir, falló al menos alguna categoría).
@@ -393,9 +422,9 @@ export default function CladesPrototype(){
     // solo las que tengan al menos un intento y algún fallo
     .filter(item => item.hasAnyMistake)
     // ordenar peor → mejor (menos aciertos primero)
-    .sort((a, b) => a.correctCount - b.correctCount);
+    .sort((a, b) => a.correctCount - b.correctCount);*/
 
-    return { playedSpecies, totalSpecies: SPECIES.length, speciesCorrectAll, rankPct, speciesList, playedSpeciesList, failedSpeciesList };
+    return { playedSpecies, totalSpecies: SPECIES.length, speciesCorrectAll, rankPct, speciesList, playedSpeciesList, /*failedSpeciesList*/ };
   },[stats]);
 
 
