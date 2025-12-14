@@ -36,14 +36,36 @@ type PerSpeciesStats = {
   lastAttemptByRank: Record<keyof Taxonomy, boolean>; // resultado del último intento (true = acierto)
 };
 
+type Achievement = {
+  id: string;
+  title: string;
+  description: string;
+  image?: string;            // ruta en public o URL
+  unlocked: boolean;
+  unlockedAt?: string;
+};
+
 type AllStats = Record<string, PerSpeciesStats>; // keyed by species.id
 
+// key para localStorage de Achievements
 const STORAGE_KEY = 'clades_stats_v1';
+// key para localStorage de logros
+const ACH_KEY = 'clades_achievements_v1';
 
 const RANKS: (keyof Taxonomy)[] = ['phylum','class','order','family','genus','species'];
 
+// definición estática de los logros/trofeos
+const ACH_DEFS: Omit<Achievement, 'unlocked'|'unlockedAt'>[] = [
+  { id: 'first_play', title: 'El novato', description: 'Has jugado tu primera especie', image: '/achievements/medalla_filosofia.png' },
+  { id: '25_species', title: 'Trofeo Linn Margulis', description: 'Has completado el 25% de especies', image: '/achievements/trofeo_lynn.png' },
+  { id: '50_species', title: 'Trofeo Aristóteles', description: 'Has completado el 50% de especies', image: '/achievements/trofeo_aristoteles.png' },
+  { id: '75_species', title: 'Trofeo Darwin', description: 'Has completado el 75% de especies', image: '/achievements/trofeo_darwin.png' },
+  { id: '100_species', title: 'Trofeo Linneo', description: 'Has completado el 100% de especies', image: '/achievements/trofeo_linneo.png' },
 
-
+  { id: '80_phylum', title: 'El filosofo', description: 'Has completado el 80% de los filos', image: '/achievements/medalla_filosofia.png' },
+  { id: '80_class', title: 'El clasista', description: 'Has completado el 80% de las clases', image: '/achievements/medalla_clasico.png' },
+  // añade más si quieres...
+];
 
 //
 // App logic
@@ -69,6 +91,41 @@ function makeEmptyPerSpeciesStats(): PerSpeciesStats {
   });
   return { attempts: 0, correctFull: 0, correctByRank: byRank, lastAttemptByRank: lastAttempt };
 }
+
+// helper: porcentaje de especies completadas (basado en "perfect" o en último intento)
+// aquí uso "isSpeciesPerfect" que ya tienes (ajústalo si tu lógica es distinta)
+function percentSpeciesCompleted(statsObj: AllStats){
+  const total = SPECIES.length;
+  const complete = SPECIES.reduce((acc, sp) => {
+    const s = statsObj[sp.id];
+    if(!s) return acc;
+    // consideramos 'perfect' como aquellas con correctByRank todos > 0
+    const isPerfect = RANKS.every(r => (s.correctByRank?.[r] || 0) > 0);
+    return acc + (isPerfect ? 1 : 0);
+  }, 0);
+  return (complete / total) * 100;
+}
+
+// helper: porcentaje de especies con rango acertado en último intento (o histórico si no hay lastAttempt)
+function percentRankCoverage(statsObj: AllStats, rank: keyof Taxonomy){
+  const total = SPECIES.length;
+  let count = 0;
+  SPECIES.forEach(sp => {
+    const s = statsObj[sp.id];
+    if (!s) return;
+    // preferimos lastAttemptByRank si existe, sino fallback a historical (correctByRank>0)
+    // esto hace tu lógica robusta si no añadiste lastAttemptByRank
+    // @ts-ignore
+    const last = s.lastAttemptByRank?.[rank];
+    if (typeof last === 'boolean') {
+      if (last) count++;
+    } else {
+      if ((s.correctByRank?.[rank] || 0) > 0) count++;
+    }
+  });
+  return (count / total) * 100;
+}
+
 
 export default function CladesPrototype(){
   const [screen, setScreen] = useState<'home' | 'game' | 'profile'>('home');
@@ -115,6 +172,7 @@ export default function CladesPrototype(){
 
 
 
+  /*
   // statistics stored in localStorage
   const [stats, setStats] = useState<AllStats>(() => {
     try {
@@ -128,6 +186,89 @@ export default function CladesPrototype(){
     SPECIES.forEach(s => base[s.id] = makeEmptyPerSpeciesStats());
     return base;
   });
+  */
+  const [stats, setStats] = useState<AllStats>(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw) as AllStats;
+
+        const normalized: AllStats = {};
+        SPECIES.forEach(sp => {
+          const stored = parsed[sp.id];
+          const empty = makeEmptyPerSpeciesStats();
+
+          normalized[sp.id] = stored
+            ? {
+                attempts: stored.attempts ?? empty.attempts,
+                correctFull: stored.correctFull ?? empty.correctFull,
+                correctByRank: { ...empty.correctByRank, ...(stored.correctByRank || {}) },
+                lastAttemptByRank: { ...empty.lastAttemptByRank, ...(stored.lastAttemptByRank || {}) }
+              }
+            : empty;
+        });
+
+        return normalized;
+      }
+    } catch (e) {}
+
+    const base: AllStats = {};
+    SPECIES.forEach(s => base[s.id] = makeEmptyPerSpeciesStats());
+    return base;
+  });
+
+  // estado local para logros
+  const [achievements, setAchievements] = useState<Record<string, Achievement>>(() => {
+    try {
+      const raw = localStorage.getItem(ACH_KEY);
+      if (raw) return JSON.parse(raw);
+    } catch(e){}
+    // inicializar con definitions (locked)
+    const obj: Record<string, Achievement> = {};
+    ACH_DEFS.forEach(a => obj[a.id] = { ...a, unlocked: false });
+    return obj;
+  });
+
+  // popup de logro (cuando se consigue)
+  const [achievementPopup, setAchievementPopup] = useState<Achievement | null>(null);
+
+
+  function saveAchievementsToStorage(obj: Record<string, Achievement>){
+    try{ localStorage.setItem(ACH_KEY, JSON.stringify(obj)); }catch(e){}
+  }
+
+  function awardAchievement(id: string, statsSnapshot: AllStats){
+    setAchievements(prev => {
+      if(prev[id]?.unlocked) return prev; // ya conseguido
+      const now = new Date().toISOString();
+      const copy = { ...prev, [id]: { ...prev[id], unlocked: true, unlockedAt: now } };
+      saveAchievementsToStorage(copy);
+      // mostrar popup con la info del logro
+      setAchievementPopup(copy[id]);
+      return copy;
+    });
+  }
+
+  // función que revisa todas las condiciones, la llamaremos después de actualizar stats
+  function checkAchievements(statsSnapshot: AllStats){
+    // nº especies completadas %
+    const pctSpecies = percentSpeciesCompleted(statsSnapshot);
+
+    if(pctSpecies >= 25) awardAchievement('25_species', statsSnapshot);
+    if(pctSpecies >= 50) awardAchievement('50_species', statsSnapshot);
+    if(pctSpecies >= 75) awardAchievement('75_species', statsSnapshot);
+    if(pctSpecies >= 100) awardAchievement('100_species', statsSnapshot);
+
+    // first play: alguna especie jugada
+    const playedCount = Object.values(statsSnapshot).filter(s => s.attempts > 0).length;
+    if(playedCount >= 1) awardAchievement('first_play', statsSnapshot);
+
+    // rank coverage trophies (80%)
+    if(percentRankCoverage(statsSnapshot, 'phylum') >= 80) awardAchievement('80_phylum', statsSnapshot);
+    if(percentRankCoverage(statsSnapshot, 'class') >= 80) awardAchievement('80_class', statsSnapshot);
+
+    // ... añade más condiciones si quieres
+  }
 
   // compute options
   const optionsByRank = useMemo(()=>{
@@ -214,6 +355,14 @@ export default function CladesPrototype(){
         entry.lastAttemptByRank = lastAttempt;
 
         copy[speciesId] = entry;
+
+        // Chequeamos logros usando el copy NUEVO
+        // Nota: dentro de setState updater aún tenemos el `copy` actualizado
+        // pero no podemos llamar checkAchievements fuera (setStats returns), así que
+        // programamos una micro-tarea para ejecutarlo justo después del setState,
+        // pasando el snapshot 'copy' (que es seguro).
+        setTimeout(() => checkAchievements(copy), 0);
+
         return copy;
       });
   }
@@ -674,6 +823,23 @@ export default function CladesPrototype(){
               ))}
             </div>
 
+            {/* Achievements / trophies */}
+            <div style={{ marginTop: 18 }}>
+              <h3 style={{ margin: '8px 0' }}>Trofeos y logros</h3>
+              <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                {Object.values(achievements).map(a => (
+                  <div key={a.id} style={{
+                    width: 140, padding: 10, borderRadius: 10, background: a.unlocked ? 'rgba(58, 105, 99, 0.2)' : '#fbfbfb',
+                    border: a.unlocked ? '1px solid rgba(58, 105, 99, 0.9)' : '1px solid #eef2f6', display:'flex', flexDirection:'column', alignItems:'center'
+                  }}>
+                    <img src={`${process.env.PUBLIC_URL}${a.image}`} alt={a.title} style={{ width: 70, height: 70, objectFit: 'contain', opacity: a.unlocked ? 1 : 0.3 }} />
+                    <div style={{ fontWeight: 500, marginTop: 8, fontSize: 13 }}>{a.title}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+
             <div style={{marginTop:18}}>
               <div className="small">Juega a las especies que aún no dominas</div>
               <div style={{marginTop:8}}>
@@ -712,7 +878,7 @@ export default function CladesPrototype(){
                           setScreen('game');
                           // practice this species: set as current and remove from remaining
                           setCurrent(item.species);
-                          console.log(item.species);
+                          console.log(achievements);
 
                         }}> Practicar </button>
                       </div>
@@ -964,6 +1130,25 @@ export default function CladesPrototype(){
                         </div>
                       </div>
                     )}
+
+                    {/* Achievement popup */}
+                    {achievementPopup && (
+                      <div style={{
+                        position:'fixed', top:0,left:0,width:'100vw',height:'100vh',
+                        display:'flex',justifyContent:'center',alignItems:'center', backgroundColor:'rgba(0,0,0,0.45)', zIndex:9999
+                      }}>
+                        <div style={{ background:'#fff', padding:20, borderRadius:12, maxWidth:420, width:'90%', textAlign:'center', boxShadow:'0 12px 40px rgba(0,0,0,0.25)' }}>
+                          <h3 style={{ marginTop:0 }}>{achievementPopup.title}</h3>
+                          {achievementPopup.image && <img src={`${process.env.PUBLIC_URL}${achievementPopup.image}`} alt={achievementPopup.title} style={{ width:120, height:120, objectFit:'contain' }} />}
+                          <p style={{ color:'#374151' }}>{achievementPopup.description}</p>
+                          <div style={{ display:'flex', justifyContent:'center', gap:10, marginTop:12 }}>
+                            <button onClick={() => setAchievementPopup(null)} className="ghost">Cerrar</button>
+                            <button onClick={() => { setAchievementPopup(null); setScreen('profile'); }} style={{background:'#3a6963', color:'#fff'}}>Ver perfil</button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
                   </>
                 </div>
               </div>
