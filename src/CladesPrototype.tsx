@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import SPECIES from './species_100_gbif.json';
+import SPECIES_JSON from './species_100_gbif.json';
 
-
+const SPECIES = SPECIES_JSON.slice(0, 5);
 //
 // Variables declaration and typescritps
 //
@@ -40,6 +40,7 @@ type Achievement = {
   id: string;
   title: string;
   description: string;
+  info?: string;
   image?: string;            // ruta en public o URL
   unlocked: boolean;
   unlockedAt?: string;
@@ -56,15 +57,18 @@ const RANKS: (keyof Taxonomy)[] = ['phylum','class','order','family','genus','sp
 
 // definición estática de los logros/trofeos
 const ACH_DEFS: Omit<Achievement, 'unlocked'|'unlockedAt'>[] = [
-  { id: 'first_play', title: 'El novato', description: 'Has jugado tu primera especie', image: '/achievements/medalla_filosofia.png' },
-  { id: '25_species', title: 'Trofeo Linn Margulis', description: 'Has completado el 25% de especies', image: '/achievements/trofeo_lynn.png' },
-  { id: '50_species', title: 'Trofeo Aristóteles', description: 'Has completado el 50% de especies', image: '/achievements/trofeo_aristoteles.png' },
-  { id: '75_species', title: 'Trofeo Darwin', description: 'Has completado el 75% de especies', image: '/achievements/trofeo_darwin.png' },
-  { id: '100_species', title: 'Trofeo Linneo', description: 'Has completado el 100% de especies', image: '/achievements/trofeo_linneo.png' },
+  { id: 'first_play', title: 'El novato', description: 'Has jugado tu primera especie', info: '', image: '/achievements/medalla_filosofia.png' },
+  { id: '25_species', title: 'Trofeo Linn Margulis', description: 'Has completado el 25% de las especies!', info: 'La gran aportación de Lynn Margulis a la taxonomía y biología evolutiva fue la Teoría de la Endosimbiosis Seriada, explicando que las células eucariotas (con núcleo) surgieron de la fusión simbiótica de bacterias procariotas, dando origen a mitocondrias y cloroplastos, y propuso, junto a Whittaker, la clasificación de los seres vivos en cinco reinos (Moneras, Protoctistas, Hongos, Plantas y Animales) basada en la simbiogénesis, enfatizando la cooperación sobre la competencia en la evolución. ', image: '/achievements/trofeo_lynn.png' },
+  { id: '50_species', title: 'Trofeo Aristóteles', description: 'Has completado el 50% de las especies!', info: 'Aristóteles es considerado el padre de la taxonomía por crear el primer sistema jerárquico de clasificación biológica, dividiendo el mundo natural en dos grandes reinos (Animal y Vegetal) y clasificando a los animales según la presencia de sangre (con sangre roja vs. sin sangre) y características como hábitat y forma de reproducción, sentando las bases para la organización científica de los seres vivos mediante la observación empírica. Introdujo por primera vez conceptos como el género y la especie.', image: '/achievements/trofeo_aristoteles.png' },
+  { id: '75_species', title: 'Trofeo Darwin', description: 'Has completado el 75% de las especies!', info: '', image: '/achievements/trofeo_darwin.png' },
+  { id: '100_species', title: 'Trofeo Linneo', description: 'Has completado el 100% de las species!', info: '', image: '/achievements/trofeo_linneo.png' },
 
-  { id: '80_phylum', title: 'El filosofo', description: 'Has completado el 80% de los filos', image: '/achievements/medalla_filosofia.png' },
-  { id: '80_class', title: 'El clasista', description: 'Has completado el 80% de las clases', image: '/achievements/medalla_clasico.png' },
-  // añade más si quieres...
+  { id: '80_phylum', title: 'Amante de la filosofía', description: 'Has acertado el 80% de los filos!', info: '', image: '/achievements/medalla_filosofia.png' },
+  { id: '80_class', title: 'Amante de lo clásico', description: 'Has acertado el 80% de las clases!', info: '', image: '/achievements/medalla_clasico.png' },
+  { id: '80_order', title: 'Amante del orden', description: 'Has acertado el 80% de los ordenes!', info: '', image: '/achievements/medalla_orden.png'},
+  { id: '80_family', title: 'Amante del orden', description: 'Has acertado el 80% de las familias!', info: '', image: '/achievements/medalla_familia.png' },
+  { id: '80_genus', title: 'Generalista', description: 'Has acertado el 80% de los géneros!', info: '', image: '/achievements/medalla_genero.png' },
+  { id: '80_species', title: 'Amante de las especies', description: 'Has acertado el 80% de las especies!', info: '', image: '/achievements/medalla_especie.png' }
 ];
 
 //
@@ -266,8 +270,11 @@ export default function CladesPrototype(){
     // rank coverage trophies (80%)
     if(percentRankCoverage(statsSnapshot, 'phylum') >= 80) awardAchievement('80_phylum', statsSnapshot);
     if(percentRankCoverage(statsSnapshot, 'class') >= 80) awardAchievement('80_class', statsSnapshot);
+    if(percentRankCoverage(statsSnapshot, 'order') >= 80) awardAchievement('80_order', statsSnapshot);
+    if(percentRankCoverage(statsSnapshot, 'family') >= 80) awardAchievement('80_family', statsSnapshot);
+    if(percentRankCoverage(statsSnapshot, 'genus') >= 80) awardAchievement('80_genus', statsSnapshot);
+    if(percentRankCoverage(statsSnapshot, 'species') >= 80) awardAchievement('80_species', statsSnapshot);
 
-    // ... añade más condiciones si quieres
   }
 
   // compute options
@@ -674,6 +681,94 @@ export default function CladesPrototype(){
   font-weight: 600;
 }
 
+.achievements-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* EXACTAMENTE 3 por fila */
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.achievement {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Overlay con efecto blur */
+.achievement-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+
+  /* Ligero tinte para mejorar contraste */
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Caja del popup */
+.achievement-modal {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+}
+
+/* Imagen del logro */
+.achievement-image {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+
+/* Texto */
+.achievement-description {
+  color: black;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.achievement-info {
+  color: #374151;
+}
+
+/* Botonera */
+.achievement-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+/* Animación opcional de entrada */
+.achievement-overlay {
+  animation: achievementFadeIn 0.3s ease-out;
+}
+
+.achievement-modal {
+  animation: achievementModalIn 0.25s ease-out;
+}
+
+@keyframes achievementFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+
 
   `;
 
@@ -826,9 +921,9 @@ export default function CladesPrototype(){
             {/* Achievements / trophies */}
             <div style={{ marginTop: 18 }}>
               <h3 style={{ margin: '8px 0' }}>Trofeos y logros</h3>
-              <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+              <div className="achievements-list">
                 {Object.values(achievements).map(a => (
-                  <div key={a.id} style={{
+                  <div className="achievement" key={a.id} style={{
                     width: 140, padding: 10, borderRadius: 10, background: a.unlocked ? 'rgba(58, 105, 99, 0.2)' : '#fbfbfb',
                     border: a.unlocked ? '1px solid rgba(58, 105, 99, 0.9)' : '1px solid #eef2f6', display:'flex', flexDirection:'column', alignItems:'center'
                   }}>
@@ -1133,17 +1228,43 @@ export default function CladesPrototype(){
 
                     {/* Achievement popup */}
                     {achievementPopup && (
-                      <div style={{
-                        position:'fixed', top:0,left:0,width:'100vw',height:'100vh',
-                        display:'flex',justifyContent:'center',alignItems:'center', backgroundColor:'rgba(0,0,0,0.45)', zIndex:9999
-                      }}>
-                        <div style={{ background:'#fff', padding:20, borderRadius:12, maxWidth:420, width:'90%', textAlign:'center', boxShadow:'0 12px 40px rgba(0,0,0,0.25)' }}>
-                          <h3 style={{ marginTop:0 }}>{achievementPopup.title}</h3>
-                          {achievementPopup.image && <img src={`${process.env.PUBLIC_URL}${achievementPopup.image}`} alt={achievementPopup.title} style={{ width:120, height:120, objectFit:'contain' }} />}
-                          <p style={{ color:'#374151' }}>{achievementPopup.description}</p>
-                          <div style={{ display:'flex', justifyContent:'center', gap:10, marginTop:12 }}>
-                            <button onClick={() => setAchievementPopup(null)} className="ghost">Cerrar</button>
-                            <button onClick={() => { setAchievementPopup(null); setScreen('profile'); }} style={{background:'#3a6963', color:'#fff'}}>Ver perfil</button>
+                      <div className="achievement-overlay">
+                        <div className="achievement-modal">
+                          <h3>{achievementPopup.title}</h3>
+
+                          {achievementPopup.image && (
+                            <img
+                              src={`${process.env.PUBLIC_URL}${achievementPopup.image}`}
+                              alt={achievementPopup.title}
+                              className="achievement-image"
+                            />
+                          )}
+
+                          <p className="achievement-description">
+                            {achievementPopup.description}
+                          </p>
+
+                          <p className="achievement-info">
+                            {achievementPopup.info}
+                          </p>
+
+                          <div className="achievement-actions">
+                            <button
+                              onClick={() => setAchievementPopup(null)}
+                              className="ghost"
+                            >
+                              Cerrar
+                            </button>
+
+                            <button
+                              onClick={() => {
+                                setAchievementPopup(null);
+                                setScreen('profile');
+                              }}
+                              style={{ background: '#3a6963', color: '#fff' }}
+                            >
+                              Ver perfil
+                            </button>
                           </div>
                         </div>
                       </div>
