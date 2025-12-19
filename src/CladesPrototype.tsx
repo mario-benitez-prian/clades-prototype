@@ -683,9 +683,11 @@ export default function CladesPrototype(){
 
 .achievements-list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* EXACTAMENTE 3 por fila */
-  gap: 16px;
-  margin-top: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .achievement {
@@ -693,6 +695,17 @@ export default function CladesPrototype(){
   flex-direction: column;
   align-items: center;
   text-align: center;
+
+  /* Ajustes que evitan solapamiento */
+  width: 100%;           /* ocupa la columna completa */
+  max-width: 100%;       /* nunca se salga del grid */
+  box-sizing: border-box;
+  padding: 12px;
+  border-radius: 12px;
+  background: #f4f6fa;
+
+  /* Flex permite que el contenido se adapte */
+  flex-shrink: 1;
 }
 
 /* Overlay con efecto blur */
@@ -702,7 +715,7 @@ export default function CladesPrototype(){
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
+  z-index: 1000;
 
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
@@ -717,7 +730,7 @@ export default function CladesPrototype(){
   padding: 20px;
   border-radius: 12px;
   max-width: 420px;
-  width: 90%;
+  width: 80%;
   text-align: center;
 
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
@@ -725,9 +738,11 @@ export default function CladesPrototype(){
 
 /* Imagen del logro */
 .achievement-image {
-  width: 120px;
-  height: 120px;
+  width: 100%;      /* ocupa todo el ancho disponible */
+  height: auto;     /* mantiene proporción */
+  max-width: 56px;  /* opcional, limita tamaño de la imagen */
   object-fit: contain;
+  margin-bottom: 8px;
 }
 
 /* Texto */
